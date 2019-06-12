@@ -1,0 +1,31 @@
+{
+  "name": "bibly",
+  "version": "0.1.0",
+  "description": "Bibly is an e-book library manager inspired by Calibre. It is an Electron app designed to be touch screen friendly. Support for all of Calibre's features are on the roadmap.",
+  "main": "main.js",
+  "scripts": {
+    "start": "node dist/main.js",
+    "build": "webpack --mode=production",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulmichaelxd/bibly.git"
+  },
+  "keywords": [
+    "electron",
+    "react"
+  ],
+  "author": "Paul DiLoreto",
+  "license": "Custom",
+  "bugs": {
+    "url": "https://github.com/paulmichaelxd/bibly/issues"
+  },
+  "homepage": "https://github.com/paulmichaelxd/bibly#readme",
+  "devDependencies": {
+    "electron": "^5.0.3",
+    "jest": "^24.8.0",
+    "webpack": "^4.33.0",
+    "webpack-cli": "^3.3.4"
+  }
+}
