@@ -28,6 +28,7 @@ function createWindow() {
   );
   // Handle 'closed' window event
   mainWindow.on('closed', () => {
+    mainWindow = null;
     if (process.platform !== 'darwin') app.quit();
   });
 }
