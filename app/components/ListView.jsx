@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ListView = props => {
+const ListView = (props) => {
   const { data } = props;
 
   return (
@@ -14,7 +14,7 @@ const ListView = props => {
 };
 
 ListView.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.string).isRequired
+  data: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default ListView;
