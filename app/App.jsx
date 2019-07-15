@@ -1,13 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Library from './components/Library';
+import MainWindow from './components/MainWindow';
 
 const useStyles = makeStyles({
   container: {
     width: '100%',
-    minHeight: '100vh'
-  }
+    minHeight: '100vh',
+  },
 });
 
 export default () => {
@@ -16,7 +16,7 @@ export default () => {
   return (
     <div className={classes.container}>
       <CssBaseline />
-      <Library />
+      <MainWindow />
     </div>
   );
 };

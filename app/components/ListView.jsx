@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ListView = (props) => {
-  const { data } = props;
+  const { books } = props;
 
   return (
     <div>
-      {data.map(book => (
+      {books.map(book => (
         <span key={book}>{book}</span>
       ))}
     </div>
@@ -14,7 +14,7 @@ const ListView = (props) => {
 };
 
 ListView.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.string).isRequired,
+  books: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default ListView;
