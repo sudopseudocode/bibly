@@ -1,7 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import MainWindow from './components/MainWindow';
+import theme from './theme';
 
 const useStyles = makeStyles({
   container: {
@@ -14,9 +16,11 @@ export default () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.container}>
-      <CssBaseline />
-      <MainWindow />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className={classes.container}>
+        <CssBaseline />
+        <MainWindow />
+      </div>
+    </ThemeProvider>
   );
 };
