@@ -11,9 +11,18 @@ const useStyles = makeStyles(theme => ({
   drawerPaper: {
     backgroundImage: `linear-gradient(${theme.palette.primary.light}, ${theme.palette.primary.dark})`,
     width: drawerWidth,
+    display: 'flex',
+    flexDirection: 'column',
   },
   content: {
     marginLeft: drawerWidth,
+  },
+  brand: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: theme.spacing(2),
+    fontSize: 25,
+    color: 'white',
   },
 }));
 
@@ -28,7 +37,7 @@ const MainWindow = (props) => {
         variant="permanent"
         classes={{ paper: classes.drawerPaper }}
       >
-        Hello
+        <h1 className={classes.brand}>Bibly</h1>
       </Drawer>
 
       <div className={classes.content}>

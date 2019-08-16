@@ -8,6 +8,11 @@ const theme = createMuiTheme({
       dark: '#4614B0',
     },
   },
+  // typography: {
+  //   h1: {
+  //     fontSize: 25,
+  //   },
+  // },
 });
 
 export default theme;
