@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import Drawer from '@material-ui/core/Drawer';
+import CollectionButton from './CollectionButton';
+import SettingsButton from './SettingsButton';
 
 const useStyles = makeStyles(theme => ({
   drawerPaper: {
@@ -9,18 +11,21 @@ const useStyles = makeStyles(theme => ({
     width: drawerWidth => drawerWidth,
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
   },
   brand: {
     display: 'flex',
     justifyContent: 'center',
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(1),
     fontFamily: 'Libre Caslon Display',
     fontSize: 35,
     fontStyle: 'normal',
     fontWeight: 'normal',
-    color: 'white',
+    color: theme.palette.primary.contrastText,
   },
-  collectionButton: {},
+  collections: {
+    flexGrow: 1,
+  },
 }));
 
 const SideBar = (props) => {
@@ -34,6 +39,15 @@ const SideBar = (props) => {
       classes={{ paper: classes.drawerPaper }}
     >
       <h1 className={classes.brand}>Bibly</h1>
+
+      <div className={classes.collections}>
+        <CollectionButton collection="Sometin" />
+        <CollectionButton collection="Sometin" />
+        <CollectionButton collection="Sometin" />
+        <CollectionButton collection="Sometin" />
+      </div>
+
+      <SettingsButton />
     </Drawer>
   );
 };
