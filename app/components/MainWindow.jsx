@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import ListView from './ListView';
-import Header from './Header';
+import Header from './Header/Header';
 import SideBar from './SideBar';
 
 const drawerWidth = 150;
@@ -33,7 +33,7 @@ const MainWindow = (props) => {
 };
 
 MainWindow.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(PropTypes.string),
 };
 MainWindow.defaultProps = {
   data: [],
