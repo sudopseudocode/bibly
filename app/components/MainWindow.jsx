@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import ListView from './ListView';
 import Header from './Header/Header';
-import SideBar from './SideBar';
+import SideBar from './SideBar/SideBar';
+import View from './View';
+import { Provider } from '../contexts/ViewContext';
 
 const drawerWidth = 150;
 
@@ -18,17 +19,15 @@ const MainWindow = (props) => {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+    <Provider>
       <SideBar drawerWidth={drawerWidth} />
 
       <div className={classes.content}>
         <Header />
 
-        <ListView
-          books={data}
-        />
+        <View data={data} />
       </div>
-    </React.Fragment>
+    </Provider>
   );
 };
 

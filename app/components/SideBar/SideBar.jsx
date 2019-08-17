@@ -9,8 +9,9 @@ const useStyles = makeStyles(theme => ({
   drawerPaper: {
     backgroundImage: `linear-gradient(${theme.palette.primary.light}, ${theme.palette.primary.dark})`,
     width: drawerWidth => drawerWidth,
-    display: 'flex',
-    flexDirection: 'column',
+    height: '100vh',
+    display: 'grid',
+    gridTemplateRows: '80px 1fr 50px',
     alignItems: 'center',
   },
   brand: {
@@ -24,7 +25,12 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.contrastText,
   },
   collections: {
-    flexGrow: 1,
+    overflow: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    height: '100%',
   },
 }));
 
@@ -41,6 +47,8 @@ const SideBar = (props) => {
       <h1 className={classes.brand}>Bibly</h1>
 
       <div className={classes.collections}>
+        <CollectionButton collection="Sometin" />
+        <CollectionButton collection="Sometin" />
         <CollectionButton collection="Sometin" />
         <CollectionButton collection="Sometin" />
         <CollectionButton collection="Sometin" />
