@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     border: `1px solid ${theme.palette.primary.contrastText}`,
     borderRadius: 5,
     color: theme.palette.primary.contrastText,
-    margin: theme.spacing(2),
+    marginTop: theme.spacing(4),
     width: 80,
     height: 80,
     display: 'flex',

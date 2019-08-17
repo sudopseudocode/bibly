@@ -5,7 +5,10 @@ import ViewControls from './ViewControls';
 
 const useStyles = makeStyles(theme => ({
   container: {
-    margin: theme.spacing(1, 5, 3, 5),
+    backgroundColor: theme.palette.background.default,
+    position: 'sticky',
+    top: 0,
+    padding: theme.spacing(1, 5, 3, 5),
   },
 }));
 

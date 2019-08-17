@@ -10,9 +10,6 @@ import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles(theme => ({
   container: {
-    backgroundColor: theme.palette.background.default,
-    position: 'sticky',
-    top: 0,
     display: 'flex',
     alignItems: 'flex-end',
     marginBottom: theme.spacing(2),
