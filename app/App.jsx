@@ -4,6 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import MainWindow from './components/MainWindow';
 import getAssets from './utils/getAssets';
 // import getMetadata from './utils/getMetadata';
+import './global.css';
 import theme from './theme';
 
 const useStyles = makeStyles({

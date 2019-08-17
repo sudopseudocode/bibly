@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto'),
+    url('./assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+@font-face {
+  font-family: 'Libre Caslon Display';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Libre Caslon Display'), local('Libre Caslon Display'),
+    url('./assets/fonts/Libre_Caslon_Display/LibreCaslonDisplay-Regular.ttf')
+      format('truetype'); /* Safari, Android, iOS */
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
