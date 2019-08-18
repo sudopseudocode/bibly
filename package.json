@@ -246,7 +246,6 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",
     "@material-ui/core": "^4.3.2",
-    "@material-ui/icons": "^4.2.1",
     "@material-ui/styles": "^4.3.0",
     "clsx": "^1.0.4",
     "connected-react-router": "^6.3.2",
@@ -256,8 +255,10 @@
     "electron-log": "^3.0.4",
     "electron-updater": "^4.0.6",
     "history": "^4.9.0",
+    "mdi-material-ui": "^6.4.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
+    "react-color": "^2.17.3",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.8.2",
     "react-redux": "^6.0.1",

@@ -30,11 +30,30 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.primary.light,
     },
   },
+  settingsButton: {
+    textTransform: 'none',
+  },
 }));
 
 const ViewControls = () => {
   const classes = useStyles();
-  const { dispatch, view } = useContext(ViewContext);
+  const { dispatch, view, viewSettings } = useContext(ViewContext);
+
+  // If in settings, we don't want to show a regular view
+  if (viewSettings) {
+    return (
+      <div className={classes.container}>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.settingsButton}
+          onClick={() => dispatch({ viewSettings: false })}
+        >
+          Go Back
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className={classes.container}>

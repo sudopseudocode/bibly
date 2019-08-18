@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 import ViewContext from '../contexts/ViewContext';
 import ListView from './Views/ListView';
 import GridView from './Views/GridView';
+import SettingsView from './Views/Settings/SettingsView';
 
 const View = (props) => {
   const { data } = props;
-  const { view } = useContext(ViewContext);
+  const { view, viewSettings } = useContext(ViewContext);
 
+  if (viewSettings) {
+    return <SettingsView />;
+  }
   if (view === 'list') {
     return <ListView data={data} />;
   }
