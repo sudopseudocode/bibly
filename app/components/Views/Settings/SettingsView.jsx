@@ -4,28 +4,15 @@ import Tab from '@material-ui/core/Tab';
 import General from './General';
 import Theme from './Theme';
 
-// const useStyles = makeStyles(theme => ({
-//   container: {
-//     margin: theme.spacing(0, 4),
-//   },
-// }));
+const views = [
+  { label: 'General', Component: General },
+  { label: 'Conversion', Component: General },
+  { label: 'Theme', Component: Theme },
+];
 
 const SettingsView = () => {
   const [step, setStep] = useState(0);
-
-  let CurrentView = null;
-  switch (step) {
-    case 0:
-      CurrentView = General;
-      break;
-    case 1:
-      break;
-    case 2:
-      CurrentView = Theme;
-      break;
-    default:
-      CurrentView = General;
-  }
+  const CurrentView = views[step].Component;
 
   return (
     <React.Fragment>
@@ -35,6 +22,12 @@ const SettingsView = () => {
         textColor="primary"
         onChange={(event, newStep) => setStep(newStep)}
       >
+        {views.map(({ label }) => (
+          <Tab
+            key={label}
+            label={label}
+          />
+        ))}
         <Tab label="General" />
         <Tab label="Conversion" disabled />
         <Tab label="Theme" />
