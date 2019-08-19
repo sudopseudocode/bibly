@@ -1,12 +1,10 @@
 import recursive from 'recursive-readdir';
-import path from 'path';
 
-const getAssets = async () => {
+const getAssets = async (libraryPath) => {
   const formats = ['epub', 'mobi', 'pdf'];
   // const fileRegex = new RegExp(`${formats.join('|')}$`);
-  const allFiles = await recursive(
-    path.resolve(process.env.HOME, 'Calibre Library'),
-  );
+
+  const allFiles = await recursive(libraryPath);
 
   return formats.reduce((acc, format) => ({
     ...acc,
