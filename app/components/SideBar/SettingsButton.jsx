@@ -9,10 +9,10 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(0.5),
   },
   button: {
-    display: 'flex',
     color: theme.palette.primary.contrastText,
     textTransform: 'none',
-    marginBottom: theme.spacing(2),
+    width: '100%',
+    height: '100%',
   },
 }));
 

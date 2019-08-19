@@ -3,8 +3,6 @@ import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
-// import GridIcon from './GridIcon';
-// import ListIcon from './ListIcon';
 import GridIcon from 'mdi-material-ui/ViewGrid';
 import ListIcon from 'mdi-material-ui/FormatListBulleted';
 import ViewContext from '../../contexts/ViewContext';
@@ -15,8 +13,12 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     width: 50,
-    padding: theme.spacing(1),
     transition: `border-color ${theme.transitions.duration.short}, background-color ${theme.transitions.duration.short}`,
+
+    '& path, rect': {
+      transition: `fill ${theme.transitions.duration.short}`,
+      fill: theme.palette.common.darkGray,
+    },
   },
   activeView: {
     transition: `border-color ${theme.transitions.duration.short}, background-color ${theme.transitions.duration.short}`,

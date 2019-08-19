@@ -5,38 +5,66 @@ import Drawer from '@material-ui/core/Drawer';
 import CollectionButton from './CollectionButton';
 import SettingsButton from './SettingsButton';
 
+const topSize = 75;
+const bottomSize = 50;
 const useStyles = makeStyles(theme => ({
   drawerPaper: {
-    backgroundImage: `linear-gradient(${theme.palette.primary.light}, ${theme.palette.primary.dark})`,
     width: drawerWidth => drawerWidth,
-    height: '100vh',
-    display: 'grid',
-    gridTemplateRows: '80px 1fr 50px',
-    alignItems: 'center',
+  },
+  top: {
+    position: 'absolute',
+    top: 0,
+    height: topSize,
+    width: '100%',
+    backgroundColor: theme.palette.primary.light,
+    borderBottom: `1px solid ${theme.palette.common.lightGray}`,
+    zIndex: 1,
   },
   brand: {
     display: 'flex',
     justifyContent: 'center',
-    marginTop: theme.spacing(1),
+    margin: theme.spacing(1, 0, 2, 0),
     fontFamily: 'Libre Caslon Display',
     fontSize: 35,
     fontStyle: 'normal',
     fontWeight: 'normal',
     color: theme.palette.primary.contrastText,
   },
-  collections: {
+  middle: {
+    position: 'absolute',
+    top: topSize,
+    bottom: bottomSize,
+    width: '100%',
     overflow: 'auto',
+    backgroundImage: `linear-gradient(${theme.palette.primary.light}, ${theme.palette.primary.dark})`,
+  },
+  collections: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    height: '100%',
+    marginTop: theme.spacing(4),
+  },
+  bottom: {
+    position: 'absolute',
+    bottom: 0,
+    height: bottomSize,
+    width: '100%',
+    backgroundColor: theme.palette.primary.dark,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    borderTop: `1px solid ${theme.palette.common.lightGray}`,
   },
 }));
 
 const SideBar = (props) => {
   const { drawerWidth } = props;
   const classes = useStyles(drawerWidth);
+  const collections = [
+    'Sometin', 'Sometin2', 'Sometin3',
+    'Sometin4', 'Sometin5', 'Really long long long collection name',
+  ];
 
   return (
     <Drawer
@@ -44,18 +72,28 @@ const SideBar = (props) => {
       variant="permanent"
       classes={{ paper: classes.drawerPaper }}
     >
-      <h1 className={classes.brand}>Bibly</h1>
-
-      <div className={classes.collections}>
-        <CollectionButton collection="Sometin" />
-        <CollectionButton collection="Sometin" />
-        <CollectionButton collection="Sometin" />
-        <CollectionButton collection="Sometin" />
-        <CollectionButton collection="Sometin" />
-        <CollectionButton collection="Sometin" />
+      <div className={classes.top}>
+        <h1 className={classes.brand}>Bibly</h1>
       </div>
 
-      <SettingsButton />
+      <div className={classes.middle}>
+        <div className={classes.collections}>
+          {collections.map(collection => (
+            <CollectionButton
+              key={collection}
+              label={collection}
+            />
+          ))}
+          <CollectionButton
+            label="New Collection"
+            isAddButton
+          />
+        </div>
+      </div>
+
+      <div className={classes.bottom}>
+        <SettingsButton />
+      </div>
     </Drawer>
   );
 };

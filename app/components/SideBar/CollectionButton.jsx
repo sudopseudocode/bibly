@@ -6,36 +6,63 @@ import ViewContext from '../../contexts/ViewContext';
 
 const useStyles = makeStyles(theme => ({
   button: {
-    border: `1px solid ${theme.palette.primary.contrastText}`,
-    borderRadius: 5,
-    color: theme.palette.primary.contrastText,
-    margin: theme.spacing(2, 0),
-    width: 80,
-    height: 80,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderRadius: 10,
+    padding: theme.spacing(1),
+    fontSize: 12,
+    fontWeight: 'bold',
+    margin: theme.spacing(1, 0),
+    width: 110,
     textTransform: 'none',
+    // Styles for Collection vs. New Collection
+    backgroundColor: isAddButton => (isAddButton
+      ? null
+      : '#F9F9F9'),
+    border: isAddButton => (isAddButton
+      ? '1px solid #F9F9F9'
+      : null),
+    color: isAddButton => (isAddButton
+      ? '#F9F9F9'
+      : theme.palette.primary.dark),
+    // Prevents text from breaking to new line
+    display: 'block',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+
+    '&:hover': {
+      backgroundColor: isAddButton => (isAddButton
+        ? null
+        : '#F9F9F9'),
+    },
   },
 }));
 
 const CollectionButton = (props) => {
-  const { collection } = props;
-  const classes = useStyles();
+  const { label, isAddButton } = props;
   const { dispatch } = useContext(ViewContext);
+  const classes = useStyles(isAddButton);
+  const handleClick = isAddButton
+    ? () => {}
+    : () => dispatch({ collection: label });
+  const formatLabel = label.length > 15
+    ? `${label.slice(0, 15)}...`
+    : label;
 
   return (
     <Button
       className={classes.button}
-      onClick={() => dispatch({ collection })}
+      onClick={handleClick}
     >
-      {collection}
+      {formatLabel}
     </Button>
   );
 };
 
 CollectionButton.propTypes = {
-  collection: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  isAddButton: PropTypes.bool,
+};
+CollectionButton.defaultProps = {
+  isAddButton: false,
 };
 
 export default CollectionButton;
