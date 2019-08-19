@@ -6,7 +6,7 @@ import Theme from './Theme';
 
 const views = [
   { label: 'General', Component: General },
-  { label: 'Conversion', Component: General },
+  { label: 'Conversion' },
   { label: 'Theme', Component: Theme },
 ];
 
@@ -22,10 +22,11 @@ const SettingsView = () => {
         textColor="primary"
         onChange={(event, newStep) => setStep(newStep)}
       >
-        {views.map(({ label }) => (
+        {views.map(({ label, Component }) => (
           <Tab
             key={label}
             label={label}
+            disabled={!Component}
           />
         ))}
       </Tabs>
