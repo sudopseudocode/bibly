@@ -14,9 +14,9 @@ const View = () => {
     pdf: [],
   });
   const libraryPath = localStorage.getItem('libraryPath');
-  useEffect(() => (
+  useEffect(() => {
     // Self-invoking function to use async inside useEffect hook
-    async () => {
+    (async () => {
       const bookFiles = await getAssets(libraryPath);
       if (bookFiles) {
         setAssets(bookFiles);
@@ -29,9 +29,8 @@ const View = () => {
         const totalTime = Date.now() - startTime;
         console.log(totalTime, allMetadata);
       }
-    }
-  )(),
-  [libraryPath]);
+    })();
+  }, [libraryPath]);
   const { epub: data } = allAssets;
 
   if (viewSettings) {

@@ -1,26 +1,21 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
+import PropTypes from 'prop-types';
 import SearchControls from './SearchControls';
 import ViewControls from './ViewControls';
 
-const useStyles = makeStyles(theme => ({
-  container: {
-    backgroundColor: theme.palette.background.default,
-    position: 'sticky',
-    top: 0,
-    padding: theme.spacing(1, 5, 3, 5),
-  },
-}));
-
-const Header = () => {
-  const classes = useStyles();
+const Header = (props) => {
+  const { topHeight } = props;
 
   return (
-    <div className={classes.container}>
-      <SearchControls />
+    <React.Fragment>
+      <SearchControls topHeight={topHeight} />
       <ViewControls />
-    </div>
+    </React.Fragment>
   );
+};
+
+Header.propTypes = {
+  topHeight: PropTypes.number.isRequired,
 };
 
 export default Header;

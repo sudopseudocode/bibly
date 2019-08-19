@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -12,19 +13,27 @@ const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
     alignItems: 'flex-end',
-    marginBottom: theme.spacing(2),
+    padding: theme.spacing(0, 4),
+    height: topHeight => topHeight,
+    borderBottom: `1px solid ${theme.palette.common.lightGray}`,
   },
   searchBar: {
+    display: 'flex',
+    alignItems: 'flex-end',
     flexGrow: 1,
-    paddingRight: theme.spacing(4),
+    height: '100%',
+    padding: theme.spacing(0, 4, 3, 0),
+    borderRight: `1px solid ${theme.palette.common.lightGray}`,
   },
   dropdown: {
     width: 150,
+    margin: theme.spacing(0, 0, 3, 4),
   },
 }));
 
-const SearchControls = () => {
-  const classes = useStyles();
+const SearchControls = (props) => {
+  const { topHeight } = props;
+  const classes = useStyles(topHeight);
   const [searchText, setSearch] = useState('');
   const [sortBy, setSort] = useState('');
 
@@ -58,6 +67,10 @@ const SearchControls = () => {
       </FormControl>
     </div>
   );
+};
+
+SearchControls.propTypes = {
+  topHeight: PropTypes.number.isRequired,
 };
 
 export default SearchControls;

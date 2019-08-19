@@ -8,6 +8,9 @@ import ListIcon from 'mdi-material-ui/FormatListBulleted';
 import ViewContext from '../../contexts/ViewContext';
 
 const useStyles = makeStyles(theme => ({
+  container: {
+    padding: theme.spacing(2, 4),
+  },
   button: {
     display: 'flex',
     justifyContent: 'center',

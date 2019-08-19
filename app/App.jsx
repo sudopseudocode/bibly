@@ -9,6 +9,7 @@ import View from './components/View';
 import './global.css';
 import theme from './theme';
 
+const topHeight = 80;
 const drawerWidth = 150;
 
 const useStyles = makeStyles({
@@ -25,10 +26,13 @@ export default () => {
       <ViewProvider>
         <DataProvider>
           <CssBaseline />
-          <SideBar drawerWidth={drawerWidth} />
+          <SideBar
+            drawerWidth={drawerWidth}
+            topHeight={topHeight}
+          />
 
           <div className={classes.content}>
-            <Header />
+            <Header topHeight={topHeight} />
             <View />
           </div>
         </DataProvider>

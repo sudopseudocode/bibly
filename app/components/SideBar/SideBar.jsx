@@ -5,16 +5,15 @@ import Drawer from '@material-ui/core/Drawer';
 import CollectionButton from './CollectionButton';
 import SettingsButton from './SettingsButton';
 
-const topSize = 75;
 const bottomSize = 50;
 const useStyles = makeStyles(theme => ({
   drawerPaper: {
-    width: drawerWidth => drawerWidth,
+    width: ({ drawerWidth }) => drawerWidth,
   },
   top: {
     position: 'absolute',
     top: 0,
-    height: topSize,
+    height: ({ topHeight }) => topHeight,
     width: '100%',
     backgroundColor: theme.palette.primary.light,
     borderBottom: `1px solid ${theme.palette.common.lightGray}`,
@@ -32,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   },
   middle: {
     position: 'absolute',
-    top: topSize,
+    top: ({ topHeight }) => topHeight,
     bottom: bottomSize,
     width: '100%',
     overflow: 'auto',
@@ -59,8 +58,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SideBar = (props) => {
-  const { drawerWidth } = props;
-  const classes = useStyles(drawerWidth);
+  const { drawerWidth, topHeight } = props;
+  const classes = useStyles({ drawerWidth, topHeight });
   const collections = [
     'Sometin', 'Sometin2', 'Sometin3',
     'Sometin4', 'Sometin5', 'Really long long long collection name',
@@ -100,6 +99,7 @@ const SideBar = (props) => {
 
 SideBar.propTypes = {
   drawerWidth: PropTypes.number.isRequired,
+  topHeight: PropTypes.number.isRequired,
 };
 
 export default SideBar;
