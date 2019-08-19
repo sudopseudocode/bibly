@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/styles';
 import Header from './Header/Header';
 import SideBar from './SideBar/SideBar';
 import View from './View';
-import { Provider } from '../contexts/ViewContext';
+import { ViewProvider } from '../contexts/ViewContext';
+import { DataProvider } from '../contexts/DataContext';
 
 const drawerWidth = 150;
 
@@ -19,15 +20,17 @@ const MainWindow = (props) => {
   const classes = useStyles();
 
   return (
-    <Provider>
-      <SideBar drawerWidth={drawerWidth} />
+    <ViewProvider>
+      <DataProvider>
+        <SideBar drawerWidth={drawerWidth} />
 
-      <div className={classes.content}>
-        <Header />
+        <div className={classes.content}>
+          <Header />
 
-        <View data={data} />
-      </div>
-    </Provider>
+          <View data={data} />
+        </div>
+      </DataProvider>
+    </ViewProvider>
   );
 };
 

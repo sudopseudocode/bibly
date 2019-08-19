@@ -28,9 +28,6 @@ const SettingsView = () => {
             label={label}
           />
         ))}
-        <Tab label="General" />
-        <Tab label="Conversion" disabled />
-        <Tab label="Theme" />
       </Tabs>
 
       <CurrentView />

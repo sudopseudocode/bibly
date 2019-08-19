@@ -9,10 +9,9 @@ db.version(1).stores({
 
 const DataContext = React.createContext();
 
-export const Provider = (props) => {
+export const DataProvider = (props) => {
   const { children } = props;
   const [state, setState] = useState({
-    settings: {},
     books: [],
   });
 
@@ -28,7 +27,7 @@ export const Provider = (props) => {
   );
 };
 
-Provider.propTypes = {
+DataProvider.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),

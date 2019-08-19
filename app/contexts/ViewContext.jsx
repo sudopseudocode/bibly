@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ViewContext = React.createContext();
 
-export const Provider = (props) => {
+export const ViewProvider = (props) => {
   const { children } = props;
   const [state, setState] = useState({
     view: 'grid',
@@ -23,7 +23,7 @@ export const Provider = (props) => {
   );
 };
 
-Provider.propTypes = {
+ViewProvider.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),

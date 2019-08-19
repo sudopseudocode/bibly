@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { remote } from 'electron';
 import { makeStyles } from '@material-ui/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -31,10 +32,18 @@ const syncServices = [
   { label: 'Google Drive', Component: GoogleDriveIcon },
   { label: 'Amazon S3', Component: AmazonIcon },
 ];
+const { dialog } = remote;
 
+/**
+ * At this point, all settings are stored in localStorage
+ * -----------------
+ *  Keys used: libraryPath
+ */
 const General = () => {
   const classes = useStyles();
-  const [libraryPath, setLibraryPath] = useState('');
+  const [libraryPath, setLibraryPath] = useState(
+    localStorage.getItem('libraryPath') || '',
+  );
 
   return (
     <div className={classes.container}>
@@ -43,16 +52,28 @@ const General = () => {
           <TextField
             fullWidth
             value={libraryPath}
-            onChange={event => setLibraryPath(event.target.value)}
+            onChange={(event) => {
+              setLibraryPath(event.target.value);
+              localStorage.setItem('libraryPath', event.target.value);
+            }}
             label="Library Path"
           />
         </div>
         <div>
           <Button
             variant="contained"
-            onClick={() => {}}
+            onClick={() => {
+              const selection = dialog.showOpenDialog({
+                properties: ['openDirectory'],
+              });
+              if (selection) {
+                const [filePath] = selection;
+                setLibraryPath(filePath);
+                localStorage.setItem('libraryPath', filePath);
+              }
+            }}
           >
-        Browse
+            Browse
           </Button>
         </div>
       </div>
