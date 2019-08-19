@@ -1,11 +1,11 @@
-import fs from 'fs';
-import util from 'util';
-
-const readFile = util.promisify(fs.readFile);
+import epub from 'epubjs';
 
 const getEpubMetadata = async (filepath) => {
-  const contents = await readFile(`${filepath}/content.opf`);
-  console.log(contents);
+  const book = epub(filepath);
+  const metadata = await book.loaded.metadata;
+
+  // book.destroy();
+  return metadata;
 };
 
 export default getEpubMetadata;

@@ -4,6 +4,7 @@ import ListView from './Views/ListView';
 import GridView from './Views/GridView';
 import SettingsView from './Views/Settings/SettingsView';
 import getAssets from '../utils/getAssets';
+import getMetadata from '../utils/getMetadata';
 
 const View = () => {
   const { view, viewSettings } = useContext(ViewContext);
@@ -12,15 +13,25 @@ const View = () => {
     mobi: [],
     pdf: [],
   });
-  useEffect(() => {
-    const libraryPath = localStorage.getItem('libraryPath');
-    getAssets(libraryPath)
-      .then((newAssets) => {
-        if (newAssets) {
-          setAssets(newAssets);
-        }
-      }).catch(err => console.error(err));
-  }, []);
+  const libraryPath = localStorage.getItem('libraryPath');
+  useEffect(() => (
+    // Self-invoking function to use async inside useEffect hook
+    async () => {
+      const bookFiles = await getAssets(libraryPath);
+      if (bookFiles) {
+        setAssets(bookFiles);
+        // Just to keep track of efficiency
+        // This is pretty slow with a lot of files...
+        const startTime = Date.now();
+        const allMetadata = await Promise.all(
+          bookFiles.epub.map(book => getMetadata(book)),
+        );
+        const totalTime = Date.now() - startTime;
+        console.log(totalTime, allMetadata);
+      }
+    }
+  )(),
+  [libraryPath]);
   const { epub: data } = allAssets;
 
   if (viewSettings) {
