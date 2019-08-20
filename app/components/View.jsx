@@ -13,20 +13,37 @@ const View = () => {
     pdf: [],
   });
   const libraryPath = localStorage.getItem('libraryPath');
+
+  // This is run whenever libraryPath changes
   useEffect(() => {
-    initLibrary(libraryPath).then((books) => {
-      setAssets(books);
-    });
+    if (libraryPath) {
+      initLibrary(libraryPath).then((books) => {
+        setAssets(books);
+      });
+    } else {
+      // Show welcome screen
+    }
   }, [libraryPath]);
+
+  // Just a placeholder, since we only support epub anyways
   const { epub: data } = allAssets;
 
-  if (viewSettings) {
-    return <SettingsView />;
-  }
-  if (view === 'list') {
-    return <ListView data={data} />;
-  }
-  return <GridView data={data} />;
+  // Chooses which component to render
+  const renderView = () => {
+    if (viewSettings) {
+      return <SettingsView />;
+    }
+    if (view === 'list') {
+      return <ListView data={data} />;
+    }
+    return <GridView data={data} />;
+  };
+
+  return (
+    <React.Fragment>
+      {renderView()}
+    </React.Fragment>
+  );
 };
 
 export default View;
