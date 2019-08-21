@@ -27,6 +27,10 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(0, 2),
     padding: theme.spacing(2, 2),
   },
+  notchedOutline: {
+    borderRadius: theme.spacing(1, 0, 0, 1),
+    borderRight: 'none',
+  },
 }));
 
 const { dialog } = remote;
@@ -65,6 +69,11 @@ const LocalLibrary = (props) => {
         label="Library Path"
         error={!!pathError}
         helperText={pathError}
+        InputProps={{
+          classes: {
+            notchedOutline: classes.notchedOutline,
+          },
+        }}
       />
 
       <Button

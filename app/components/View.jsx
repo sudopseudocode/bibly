@@ -48,7 +48,6 @@ const View = () => {
         open={showWelcome}
         onClose={() => setWelcome(false)}
       />
-;
 
       {renderView()}
     </React.Fragment>
