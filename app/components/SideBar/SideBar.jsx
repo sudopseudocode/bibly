@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     height: ({ topHeight }) => topHeight,
     width: '100%',
     backgroundColor: theme.palette.primary.light,
-    borderBottom: `1px solid ${theme.palette.common.lightGray}`,
+    borderBottom: `1px solid ${theme.palette.common.gray}`,
     zIndex: 1,
   },
   brand: {
@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    borderTop: `1px solid ${theme.palette.common.lightGray}`,
+    borderTop: `1px solid ${theme.palette.common.gray}`,
   },
 }));
 

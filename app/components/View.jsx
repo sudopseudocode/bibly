@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ViewContext from '../contexts/ViewContext';
+import WelcomeDialog from './Views/WelcomeDialog';
 import ListView from './Views/ListView';
 import GridView from './Views/GridView';
 import SettingsView from './Views/Settings/SettingsView';
@@ -7,6 +8,7 @@ import initLibrary from '../utils/initLibrary';
 
 const View = () => {
   const { view, viewSettings } = useContext(ViewContext);
+  const [showWelcome, setWelcome] = useState(false);
   const [allAssets, setAssets] = useState({
     epub: [],
     mobi: [],
@@ -22,6 +24,7 @@ const View = () => {
       });
     } else {
       // Show welcome screen
+      setWelcome(true);
     }
   }, [libraryPath]);
 
@@ -41,6 +44,12 @@ const View = () => {
 
   return (
     <React.Fragment>
+      <WelcomeDialog
+        open={showWelcome}
+        onClose={() => setWelcome(false)}
+      />
+;
+
       {renderView()}
     </React.Fragment>
   );

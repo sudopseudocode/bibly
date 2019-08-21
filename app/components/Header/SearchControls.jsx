@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-end',
     padding: theme.spacing(0, 4),
     height: topHeight => topHeight,
-    borderBottom: `1px solid ${theme.palette.common.lightGray}`,
+    borderBottom: `1px solid ${theme.palette.common.gray}`,
   },
   searchBar: {
     display: 'flex',
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     height: '100%',
     padding: theme.spacing(0, 4, 3, 0),
-    borderRight: `1px solid ${theme.palette.common.lightGray}`,
+    borderRight: `1px solid ${theme.palette.common.gray}`,
   },
   dropdown: {
     width: 150,
