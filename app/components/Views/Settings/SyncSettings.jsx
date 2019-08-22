@@ -3,7 +3,10 @@ import { makeStyles } from '@material-ui/styles';
 import GoogleDriveIcon from 'mdi-material-ui/GoogleDrive';
 import DropboxIcon from 'mdi-material-ui/Dropbox';
 import AmazonIcon from 'mdi-material-ui/Amazon';
-import Button from '@material-ui/core/Button';
+import {
+  Button,
+  Tooltip,
+} from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -44,15 +47,18 @@ const SyncButtons = () => {
   return (
     <div className={classes.container}>
       {syncServices.map(({ label, onClick, Icon }) => (
-        <Button
-          key={label}
-          variant="outlined"
-          color="primary"
-          className={classes.button}
-          onClick={onClick}
+        <Tooltip
+          title={label}
         >
-          <Icon />
-        </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.button}
+            onClick={onClick}
+          >
+            <Icon />
+          </Button>
+        </Tooltip>
       ))}
     </div>
   );

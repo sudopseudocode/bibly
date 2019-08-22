@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/styles';
-import Button from '@material-ui/core/Button';
+import { Button } from '@material-ui/core';
 import SettingsIcon from 'mdi-material-ui/Settings';
 import ViewContext from '../../contexts/ViewContext';
 

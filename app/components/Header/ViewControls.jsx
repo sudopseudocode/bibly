@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Button from '@material-ui/core/Button';
+import {
+  ButtonGroup,
+  Button,
+} from '@material-ui/core';
 import GridIcon from 'mdi-material-ui/ViewGrid';
 import ListIcon from 'mdi-material-ui/FormatListBulleted';
 import ViewContext from '../../contexts/ViewContext';

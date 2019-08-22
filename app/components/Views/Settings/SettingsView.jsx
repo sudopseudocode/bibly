@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import {
+  Tabs,
+  Tab,
+} from '@material-ui/core';
 import General from './General';
 
 const views = [

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, ThemeProvider } from '@material-ui/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { CssBaseline } from '@material-ui/core';
 import { ViewProvider } from './contexts/ViewContext';
 import { DataProvider } from './contexts/DataContext';
 import Header from './components/Header/Header';

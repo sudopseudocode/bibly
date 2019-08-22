@@ -1,9 +1,7 @@
-import getAssets from './getAssets';
 import getMetadata from './getMetadata';
 
-const initLibrary = async (libraryPath) => {
-  const bookFiles = await getAssets(libraryPath);
-  if (bookFiles) {
+const initLibrary = async (bookFiles) => {
+  if (Array.isArray(bookFiles)) {
     // Just to keep track of efficiency
     // This is pretty slow with a lot of files...
     const startTime = Date.now();
@@ -13,8 +11,6 @@ const initLibrary = async (libraryPath) => {
     const totalTime = Date.now() - startTime;
     console.log(totalTime, allMetadata);
   }
-
-  return bookFiles;
 };
 
 export default initLibrary;

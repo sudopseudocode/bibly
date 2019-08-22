@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
-import Dialog from '@material-ui/core/Dialog';
+import { Dialog } from '@material-ui/core';
 import SyncSettings from './Settings/SyncSettings';
 import LocalLibrary from './Settings/LocalLibrary';
 

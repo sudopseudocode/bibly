@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import Drawer from '@material-ui/core/Drawer';
+import { Drawer } from '@material-ui/core';
 import CollectionButton from './CollectionButton';
 import SettingsButton from './SettingsButton';
 
@@ -36,6 +36,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     overflow: 'auto',
     backgroundImage: `linear-gradient(${theme.palette.primary.light}, ${theme.palette.primary.dark})`,
+    zIndex: 1,
   },
   collections: {
     display: 'flex',

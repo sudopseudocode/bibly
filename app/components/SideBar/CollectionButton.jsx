@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import Button from '@material-ui/core/Button';
+import { Button } from '@material-ui/core';
 import ViewContext from '../../contexts/ViewContext';
 
 const useStyles = makeStyles(theme => ({
