@@ -13,39 +13,27 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1, 0),
     width: 110,
     textTransform: 'none',
-    // Styles for Collection vs. New Collection
-    backgroundColor: isAddButton => (isAddButton
-      ? null
-      : '#F9F9F9'),
-    border: isAddButton => (isAddButton
-      ? '1px solid #F9F9F9'
-      : null),
-    color: isAddButton => (isAddButton
-      ? '#F9F9F9'
-      : theme.palette.primary.dark),
+    backgroundColor: theme.palette.common.lighterGray,
+    color: theme.palette.primary.dark,
     // Prevents text from breaking to new line
     display: 'block',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
 
     '&:hover': {
-      backgroundColor: isAddButton => (isAddButton
-        ? null
-        : '#F9F9F9'),
+      backgroundColor: theme.palette.common.lighterGray,
     },
   },
 }));
 
 const CollectionButton = (props) => {
-  const { label, isAddButton } = props;
+  const { label } = props;
   const { dispatch } = useContext(ViewContext);
-  const classes = useStyles(isAddButton);
-  const handleClick = isAddButton
-    ? () => {}
-    : () => dispatch({ collection: label });
+  const classes = useStyles();
   const formatLabel = label.length > 15
     ? `${label.slice(0, 15)}...`
     : label;
+  const handleClick = () => dispatch({ collection: label });
 
   return (
     <Button
@@ -59,10 +47,6 @@ const CollectionButton = (props) => {
 
 CollectionButton.propTypes = {
   label: PropTypes.string.isRequired,
-  isAddButton: PropTypes.bool,
-};
-CollectionButton.defaultProps = {
-  isAddButton: false,
 };
 
 export default CollectionButton;

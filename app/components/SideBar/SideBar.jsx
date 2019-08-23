@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Drawer } from '@material-ui/core';
+import generateId from 'uuid/v4';
 import CollectionButton from './CollectionButton';
+import NewCollection from './NewCollection';
 import SettingsButton from './SettingsButton';
 
 const bottomSize = 50;
@@ -61,10 +63,13 @@ const useStyles = makeStyles(theme => ({
 const SideBar = (props) => {
   const { drawerWidth, topHeight } = props;
   const classes = useStyles({ drawerWidth, topHeight });
-  const collections = [
-    'Sometin', 'Sometin2', 'Sometin3',
-    'Sometin4', 'Sometin5', 'Really long long long collection name',
-  ];
+  let initCollections;
+  try {
+    initCollections = JSON.parse(localStorage.getItem('collections'));
+  } catch (err) {
+    initCollections = {};
+  }
+  const [collections, setCollections] = useState(initCollections);
 
   return (
     <Drawer
@@ -78,15 +83,29 @@ const SideBar = (props) => {
 
       <div className={classes.middle}>
         <div className={classes.collections}>
-          {collections.map(collection => (
+          {Object.values(collections).map(({ id, label }) => (
             <CollectionButton
-              key={collection}
-              label={collection}
+              key={id}
+              label={label}
+              onChange={() => {}}
             />
           ))}
-          <CollectionButton
-            label="New Collection"
-            isAddButton
+          <NewCollection
+            onSubmit={(newCollection) => {
+              const id = generateId();
+              const newCollections = {
+                ...collections,
+                [id]: {
+                  id,
+                  label: newCollection,
+                },
+              };
+              setCollections(newCollections);
+              localStorage.setItem(
+                'collections',
+                JSON.stringify(newCollections),
+              );
+            }}
           />
         </div>
       </div>
