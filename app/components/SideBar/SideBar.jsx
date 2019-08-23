@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     top: 0,
     height: ({ topHeight }) => topHeight,
     width: '100%',
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: theme.palette.primary.main,
     borderBottom: `1px solid ${theme.palette.common.gray}`,
     zIndex: 1,
   },
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     bottom: bottomSize,
     width: '100%',
     overflow: 'auto',
-    backgroundImage: `linear-gradient(${theme.palette.primary.light}, ${theme.palette.primary.dark})`,
+    backgroundImage: `linear-gradient(${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
     zIndex: 1,
   },
   collections: {

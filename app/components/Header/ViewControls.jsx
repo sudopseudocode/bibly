@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
       fill: theme.palette.primary.contrastText,
     },
     '&:hover': {
-      backgroundColor: theme.palette.primary.light,
+      backgroundColor: theme.palette.primary.dark,
     },
   },
   settingsButton: {

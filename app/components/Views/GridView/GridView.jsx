@@ -7,6 +7,7 @@ const useStyles = makeStyles(theme => ({
   container: {
     margin: theme.spacing(0, 2),
     display: 'flex',
+    flexWrap: 'wrap',
   },
 }));
 

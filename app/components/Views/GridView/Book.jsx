@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
   placeholder: {
     height: 300,
-    backgroundColor: '#A57BDC',
+    backgroundColor: theme.palette.primary.light,
     fontFamily: 'Libre Meslo Display',
     fontSize: 50,
     fontWeight: 'normal',
