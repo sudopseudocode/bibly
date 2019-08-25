@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const RenamePopover = (props) => {
+const EditCollection = (props) => {
   const {
     anchorEl,
     open,
@@ -86,7 +86,7 @@ const RenamePopover = (props) => {
   );
 };
 
-RenamePopover.propTypes = {
+EditCollection.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
@@ -97,11 +97,11 @@ RenamePopover.propTypes = {
   presetValue: PropTypes.string,
   resetSubmit: PropTypes.bool,
 };
-RenamePopover.defaultProps = {
+EditCollection.defaultProps = {
   anchorEl: null,
   label: 'Submit',
   presetValue: '',
   resetSubmit: false,
 };
 
-export default RenamePopover;
+export default EditCollection;

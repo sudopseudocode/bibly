@@ -48,6 +48,7 @@ const ContextMenu = (props) => {
     >
       {menuItems.map(item => (
         <MenuItem
+          key={item.label}
           onClick={() => {
             onClose();
             if (item.onClick) item.onClick();

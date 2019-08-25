@@ -19,10 +19,9 @@ const useStyles = makeStyles(theme => ({
   },
   message: {
     fontFamily: 'Libre Meslo Display',
-    fontSize: 20,
-    display: 'flex',
-    justifyContent: 'center',
-    margin: theme.spacing(6, 4, 4, 0),
+    fontSize: 18,
+    margin: theme.spacing(6, 4, 0, 4),
+    textAlign: 'center',
   },
   buttonGroup: {
     display: 'flex',

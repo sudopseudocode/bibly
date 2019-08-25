@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Drawer } from '@material-ui/core';
-import generateId from 'uuid/v4';
-import CollectionButton from './CollectionButton';
-import NewCollection from './NewCollection';
 import SettingsButton from './SettingsButton';
+import Collections from './Collections';
 
 const bottomSize = 50;
 const useStyles = makeStyles(theme => ({
@@ -40,13 +38,6 @@ const useStyles = makeStyles(theme => ({
     backgroundImage: `linear-gradient(${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
     zIndex: 1,
   },
-  collections: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginTop: theme.spacing(4),
-  },
   bottom: {
     position: 'absolute',
     bottom: 0,
@@ -63,13 +54,6 @@ const useStyles = makeStyles(theme => ({
 const SideBar = (props) => {
   const { drawerWidth, topHeight } = props;
   const classes = useStyles({ drawerWidth, topHeight });
-  let initCollections;
-  try {
-    initCollections = JSON.parse(localStorage.getItem('collections'));
-  } catch (err) {
-    initCollections = {};
-  }
-  const [collections, setCollections] = useState(initCollections);
 
   return (
     <Drawer
@@ -82,54 +66,7 @@ const SideBar = (props) => {
       </div>
 
       <div className={classes.middle}>
-        <div className={classes.collections}>
-          {Object.values(collections).map(({ id, label }) => (
-            <CollectionButton
-              key={id}
-              label={label}
-              onRename={(newLabel) => {
-                const newCollections = {
-                  ...collections,
-                  [id]: {
-                    id,
-                    label: newLabel,
-                  },
-                };
-                setCollections(newCollections);
-                localStorage.setItem(
-                  'collections',
-                  JSON.stringify(newCollections),
-                );
-              }}
-              onDelete={() => {
-                const newCollections = { ...collections };
-                delete newCollections[id];
-                setCollections(newCollections);
-                localStorage.setItem(
-                  'collections',
-                  JSON.stringify(newCollections),
-                );
-              }}
-            />
-          ))}
-          <NewCollection
-            onSubmit={(newCollection) => {
-              const id = generateId();
-              const newCollections = {
-                ...collections,
-                [id]: {
-                  id,
-                  label: newCollection,
-                },
-              };
-              setCollections(newCollections);
-              localStorage.setItem(
-                'collections',
-                JSON.stringify(newCollections),
-              );
-            }}
-          />
-        </div>
+        <Collections />
       </div>
 
       <div className={classes.bottom}>
