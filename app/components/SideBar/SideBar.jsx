@@ -87,7 +87,29 @@ const SideBar = (props) => {
             <CollectionButton
               key={id}
               label={label}
-              onChange={() => {}}
+              onRename={(newLabel) => {
+                const newCollections = {
+                  ...collections,
+                  [id]: {
+                    id,
+                    label: newLabel,
+                  },
+                };
+                setCollections(newCollections);
+                localStorage.setItem(
+                  'collections',
+                  JSON.stringify(newCollections),
+                );
+              }}
+              onDelete={() => {
+                const newCollections = { ...collections };
+                delete newCollections[id];
+                setCollections(newCollections);
+                localStorage.setItem(
+                  'collections',
+                  JSON.stringify(newCollections),
+                );
+              }}
             />
           ))}
           <NewCollection

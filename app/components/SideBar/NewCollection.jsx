@@ -37,10 +37,12 @@ const NewCollection = (props) => {
       </Button>
 
       <EditPopover
+        open={!!anchorEl}
         anchorEl={anchorEl}
         onClose={() => setAnchorEl(null)}
         onSubmit={onSubmit}
         label="Add"
+        resetSubmit
       />
     </React.Fragment>
   );

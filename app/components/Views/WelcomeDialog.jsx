@@ -63,7 +63,7 @@ const WelcomeDialog = (props) => {
       </h2>
       <div className={classes.content}>
         <p className={classes.paragraph}>
-          Choose a path on your computer where you want to import &
+          Choose a path on your computer where you want to import &amp;
           save your book files or choose to sync your library using Dropbox,
           Google Drive, or Amazon S3.
         </p>

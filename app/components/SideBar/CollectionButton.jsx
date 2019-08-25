@@ -1,9 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
 import ViewContext from '../../contexts/ViewContext';
 import ContextMenu from '../ContextMenu';
+import EditCollection from './EditCollection';
+import ConfirmDelete from './ConfirmDelete';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -28,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CollectionButton = (props) => {
-  const { label } = props;
+  const { label, onRename, onDelete } = props;
   const { dispatch } = useContext(ViewContext);
   const classes = useStyles();
   const formatLabel = label.length > 15
@@ -37,38 +39,58 @@ const CollectionButton = (props) => {
   const handleClick = () => dispatch({ collection: label });
   const [left, setLeft] = useState(0);
   const [top, setTop] = useState(0);
-  const [open, setOpen] = useState(false);
+  const anchorEl = useRef(null);
+  const [context, setContext] = useState(false);
+  const [rename, setRename] = useState(false);
+  const [confirmDelete, setDelete] = useState(false);
 
   return (
     <React.Fragment>
       <Button
         className={classes.button}
+        ref={anchorEl}
         onClick={handleClick}
         onContextMenu={(event) => {
           event.preventDefault();
           setLeft(event.clientX);
           setTop(event.clientY);
-          setOpen(true);
+          setContext(true);
         }}
       >
         {formatLabel}
       </Button>
 
       <ContextMenu
-        open={open}
+        open={context}
         left={left}
         top={top}
-        onClose={() => setOpen(false)}
+        onClose={() => setContext(false)}
         menuItems={[
           {
             label: 'Rename',
-            onClick: () => {},
+            onClick: () => setRename(true),
           },
           {
             label: 'Delete',
-            onClick: () => {},
+            onClick: () => setDelete(true),
           },
         ]}
+      />
+
+      <EditCollection
+        open={rename}
+        presetValue={label}
+        anchorEl={anchorEl.current}
+        onClose={() => setRename(false)}
+        onSubmit={onRename}
+        label="Rename"
+      />
+
+      <ConfirmDelete
+        open={confirmDelete}
+        onClose={() => setDelete(false)}
+        onDelete={onDelete}
+        collectionName={label}
       />
     </React.Fragment>
   );
@@ -76,6 +98,8 @@ const CollectionButton = (props) => {
 
 CollectionButton.propTypes = {
   label: PropTypes.string.isRequired,
+  onRename: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default CollectionButton;

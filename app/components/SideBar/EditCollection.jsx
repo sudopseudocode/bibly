@@ -28,16 +28,19 @@ const useStyles = makeStyles(theme => ({
 const RenamePopover = (props) => {
   const {
     anchorEl,
+    open,
     onClose,
     onSubmit,
     label,
+    resetSubmit,
+    presetValue,
   } = props;
-  const [collection, setCollection] = useState('');
+  const [collection, setCollection] = useState(presetValue);
   const classes = useStyles();
 
   return (
     <Popover
-      open={!!anchorEl}
+      open={open}
       anchorEl={anchorEl}
       onClose={onClose}
       onContextMenu={(event) => {
@@ -58,8 +61,8 @@ const RenamePopover = (props) => {
         onSubmit={(event) => {
           event.preventDefault();
           if (!collection) return;
+          if (resetSubmit) setCollection('');
           onSubmit(collection);
-          setCollection('');
           onClose();
         }}
       >
@@ -84,16 +87,21 @@ const RenamePopover = (props) => {
 };
 
 RenamePopover.propTypes = {
+  open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   anchorEl: PropTypes.shape({
     current: PropTypes.element,
   }),
   label: PropTypes.string,
+  presetValue: PropTypes.string,
+  resetSubmit: PropTypes.bool,
 };
 RenamePopover.defaultProps = {
   anchorEl: null,
   label: 'Submit',
+  presetValue: '',
+  resetSubmit: false,
 };
 
 export default RenamePopover;
