@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import {
-  Button,
-  Fab,
-  Popover,
-  TextField,
-} from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import EditPopover from './EditCollection';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -24,35 +20,12 @@ const useStyles = makeStyles(theme => ({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
   },
-  menu: {
-    marginTop: theme.spacing(1),
-    padding: theme.spacing(2),
-    display: 'flex',
-    alignItems: 'center',
-  },
-  text: {
-    flexGrow: 1,
-  },
-  addButton: {
-    marginLeft: theme.spacing(2),
-    textTransform: 'none',
-    width: 70,
-    height: 35,
-  },
 }));
 
 const NewCollection = (props) => {
   const { onSubmit } = props;
   const classes = useStyles();
-  const [collection, setCollection] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
-  const handleClose = () => setAnchorEl(null);
-  const handleAdd = () => {
-    if (!collection) return;
-    onSubmit(collection);
-    setCollection('');
-    handleClose();
-  };
 
   return (
     <React.Fragment>
@@ -63,47 +36,12 @@ const NewCollection = (props) => {
         New Collection
       </Button>
 
-      <Popover
-        open={!!anchorEl}
+      <EditPopover
         anchorEl={anchorEl}
-        onClose={handleClose}
-        onContextMenu={(event) => {
-          event.preventDefault();
-          handleClose();
-        }}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-        classes={{ paper: classes.menu }}
-      >
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            handleAdd();
-          }}
-        >
-          <TextField
-            autoFocus
-            value={collection}
-            placeholder="Collection Name"
-            onChange={event => setCollection(event.target.value)}
-            className={classes.text}
-          />
-          <Fab
-            color="primary"
-            variant="extended"
-            className={classes.addButton}
-            onClick={handleAdd}
-          >
-          Add
-          </Fab>
-        </form>
-      </Popover>
+        onClose={() => setAnchorEl(null)}
+        onSubmit={onSubmit}
+        label="Add"
+      />
     </React.Fragment>
   );
 };
