@@ -20,13 +20,12 @@ const useStyles = makeStyles(theme => ({
   message: {
     fontFamily: 'Libre Meslo Display',
     fontSize: 18,
-    margin: theme.spacing(6, 4, 0, 4),
     textAlign: 'center',
   },
   buttonGroup: {
     display: 'flex',
     justifyContent: 'center',
-    margin: theme.spacing(4, 0),
+    margin: theme.spacing(6, 0, 0, 0),
 
     '& button': {
       textTransform: 'none',
@@ -69,7 +68,7 @@ const ConfirmDelete = (props) => {
         <Close />
       </IconButton>
 
-      <div clasName={classes.content}>
+      <div className={classes.content}>
         <p className={classes.message}>
           Are you sure you want to delete the collection called
           &quot;

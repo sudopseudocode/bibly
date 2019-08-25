@@ -2,8 +2,8 @@ import React, { useState, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
-import ViewContext from '../../contexts/ViewContext';
-import ContextMenu from '../ContextMenu';
+import ViewContext from '../../../contexts/ViewContext';
+import ContextMenu from '../../ContextMenu';
 import EditCollection from './EditCollection';
 import ConfirmDelete from './ConfirmDelete';
 

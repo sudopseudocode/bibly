@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Drawer } from '@material-ui/core';
 import SettingsButton from './SettingsButton';
-import Collections from './Collections';
+import Collections from './Collections/Collections';
 
 const bottomSize = 50;
 const useStyles = makeStyles(theme => ({
