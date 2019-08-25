@@ -67,6 +67,10 @@ const NewCollection = (props) => {
         open={!!anchorEl}
         anchorEl={anchorEl}
         onClose={handleClose}
+        onContextMenu={(event) => {
+          event.preventDefault();
+          handleClose();
+        }}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'center',

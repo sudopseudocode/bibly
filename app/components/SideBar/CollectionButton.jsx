@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
 import ViewContext from '../../contexts/ViewContext';
+import ContextMenu from '../ContextMenu';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -34,14 +35,42 @@ const CollectionButton = (props) => {
     ? `${label.slice(0, 15)}...`
     : label;
   const handleClick = () => dispatch({ collection: label });
+  const [left, setLeft] = useState(0);
+  const [top, setTop] = useState(0);
+  const [open, setOpen] = useState(false);
 
   return (
-    <Button
-      className={classes.button}
-      onClick={handleClick}
-    >
-      {formatLabel}
-    </Button>
+    <React.Fragment>
+      <Button
+        className={classes.button}
+        onClick={handleClick}
+        onContextMenu={(event) => {
+          event.preventDefault();
+          setLeft(event.clientX);
+          setTop(event.clientY);
+          setOpen(true);
+        }}
+      >
+        {formatLabel}
+      </Button>
+
+      <ContextMenu
+        open={open}
+        left={left}
+        top={top}
+        onClose={() => setOpen(false)}
+        menuItems={[
+          {
+            label: 'Rename',
+            onClick: () => {},
+          },
+          {
+            label: 'Delete',
+            onClick: () => {},
+          },
+        ]}
+      />
+    </React.Fragment>
   );
 };
 
