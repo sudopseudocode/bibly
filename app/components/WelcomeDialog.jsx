@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Dialog } from '@material-ui/core';
-import SyncSettings from './Settings/SyncSettings';
-import LocalLibrary from './Settings/LocalLibrary';
+import SyncSettings from './Views/Settings/SyncSettings';
+import LocalLibrary from './Views/Settings/LocalLibrary';
 
 const useStyles = makeStyles(theme => ({
   title: {
