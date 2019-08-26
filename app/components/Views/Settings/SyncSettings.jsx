@@ -49,6 +49,7 @@ const SyncButtons = () => {
       {syncServices.map(({ label, onClick, Icon }) => (
         <Tooltip
           title={label}
+          key={label}
         >
           <Button
             variant="outlined"
