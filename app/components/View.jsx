@@ -1,10 +1,30 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { makeStyles } from '@material-ui/styles';
 import ViewContext from '../contexts/ViewContext';
 import WelcomeDialog from './Views/WelcomeDialog';
 import ListView from './Views/ListView/ListView';
 import GridView from './Views/GridView/GridView';
 import SettingsView from './Views/Settings/SettingsView';
+import Header from './Header/Header';
+import SideBar from './SideBar/SideBar';
+import StatusBar from './StatusBar';
 import getAssets from '../utils/getAssets';
+
+const topHeight = 80;
+const bottomHeight = 50;
+const drawerWidth = 150;
+
+const useStyles = makeStyles({
+  container: {
+    marginLeft: drawerWidth,
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  content: {
+    flexGrow: 1,
+  },
+});
 
 const View = () => {
   const { view, viewSettings } = useContext(ViewContext);
@@ -14,6 +34,7 @@ const View = () => {
     mobi: [],
     pdf: [],
   });
+  const classes = useStyles();
   const libraryPath = localStorage.getItem('libraryPath');
 
   // This is run whenever libraryPath changes
@@ -43,14 +64,31 @@ const View = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <WelcomeDialog
         open={showWelcome}
         onClose={() => setWelcome(false)}
       />
 
-      {renderView()}
-    </React.Fragment>
+      <SideBar
+        drawerWidth={drawerWidth}
+        topHeight={topHeight}
+        bottomHeight={bottomHeight}
+      />
+
+      <div className={classes.container}>
+        <Header topHeight={topHeight} />
+
+        <div className={classes.content}>
+          {renderView()}
+        </div>
+
+        <StatusBar
+          data={data}
+          height={bottomHeight}
+        />
+      </div>
+    </>
   );
 };
 

@@ -5,7 +5,6 @@ import { Drawer } from '@material-ui/core';
 import SettingsButton from './SettingsButton';
 import Collections from './Collections/Collections';
 
-const bottomSize = 50;
 const useStyles = makeStyles(theme => ({
   drawerPaper: {
     width: ({ drawerWidth }) => drawerWidth,
@@ -32,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   middle: {
     position: 'absolute',
     top: ({ topHeight }) => topHeight,
-    bottom: bottomSize,
+    bottom: ({ bottomHeight }) => bottomHeight,
     width: '100%',
     overflow: 'auto',
     backgroundImage: `linear-gradient(${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
@@ -41,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   bottom: {
     position: 'absolute',
     bottom: 0,
-    height: bottomSize,
+    height: ({ bottomHeight }) => bottomHeight,
     width: '100%',
     backgroundColor: theme.palette.primary.dark,
     display: 'flex',
@@ -52,8 +51,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SideBar = (props) => {
-  const { drawerWidth, topHeight } = props;
-  const classes = useStyles({ drawerWidth, topHeight });
+  const { drawerWidth, topHeight, bottomHeight } = props;
+  const classes = useStyles({ drawerWidth, topHeight, bottomHeight });
 
   return (
     <Drawer
@@ -79,6 +78,7 @@ const SideBar = (props) => {
 SideBar.propTypes = {
   drawerWidth: PropTypes.number.isRequired,
   topHeight: PropTypes.number.isRequired,
+  bottomHeight: PropTypes.number.isRequired,
 };
 
 export default SideBar;
