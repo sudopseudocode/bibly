@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { remote } from 'electron';
 import path from 'path';
@@ -9,6 +9,7 @@ import {
   Button,
 } from '@material-ui/core';
 import FolderOpenIcon from 'mdi-material-ui/FolderOpen';
+import DataContext from '../../../contexts/DataContext';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -40,12 +41,17 @@ const { dialog } = remote;
 const LocalLibrary = (props) => {
   const { onClose } = props;
   const classes = useStyles();
+  const {
+    dispatch,
+    libraryPath: contextLibraryPath,
+  } = useContext(DataContext);
   const [libraryPath, setLibraryPath] = useState(
-    localStorage.getItem('libraryPath')
+    contextLibraryPath
     || path.resolve(process.env.HOME, 'Bibly Library'),
   );
   const [pathError, setPathError] = useState(null);
-  // Update error every time libraryPath changes
+
+  // Update error every time libraryPath state changes
   useEffect(() => {
     fs.lstat(libraryPath, (err, fileStats) => {
       if (err) {
@@ -89,8 +95,6 @@ const LocalLibrary = (props) => {
           if (selection) {
             const [filePath] = selection;
             setLibraryPath(filePath);
-            localStorage.setItem('libraryPath', filePath);
-            if (typeof onClose === 'function') onClose();
           }
         }}
       >
@@ -103,8 +107,9 @@ const LocalLibrary = (props) => {
         className={classes.useLibrary}
         disabled={!!pathError}
         onClick={() => {
-          if (pathError) return;
-          localStorage.setItem('libraryPath', libraryPath);
+          if (pathError || !libraryPath) return;
+          // Dispatcher updates localStorage for us
+          dispatch({ libraryPath });
           if (typeof onClose === 'function') onClose();
         }}
       >

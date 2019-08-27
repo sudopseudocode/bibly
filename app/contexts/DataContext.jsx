@@ -1,31 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import WelcomeDialog from '../components/WelcomeDialog';
 import initLibrary from '../utils/initLibrary';
 
 const DataContext = React.createContext();
 
 export const DataProvider = (props) => {
   const { children } = props;
-  const [showWelcome, setWelcome] = useState(false);
+  // State used in the Provider
   const [state, setWholeState] = useState({
+    libraryPath: localStorage.getItem('libraryPath'),
     loading: false,
     updating: false,
     books: [],
   });
-  const setState = newState => setWholeState({ ...state, ...newState });
-  // TODO track libraryPath changes with onStorage event?
-  const libraryPath = localStorage.getItem('libraryPath');
+  const setState = (newState) => {
+    setWholeState({ ...state, ...newState });
+    // Sync state changes with localStorage
+    if (newState.libraryPath) {
+      localStorage.setItem('libraryPath', newState.libraryPath);
+    }
+  };
 
-  // Update filePaths whenever libraryPath changes
-  // Compare filePaths whenever they change
+  // Update libraryPath state on localStorage change
+  // This only works when changed from another window/tab
+  useEffect(() => {
+    const updateLibraryPath = () => {
+      setState({ libraryPath: localStorage.getItem('libraryPath') });
+    };
+    window.addEventListener('storage', updateLibraryPath);
+
+    // Clean up side effects
+    return () => window.removeEventListener('storage', updateLibraryPath);
+  }, []);
+
+  // Reinit Library whenever libraryPath changes
+  const { libraryPath } = state;
   useEffect(() => {
     if (libraryPath) {
       // Init Library
       initLibrary(libraryPath, setState);
-    } else {
-      // Show welcome screen to set libraryPath
-      setWelcome(true);
     }
   }, [libraryPath]);
 
@@ -36,11 +49,6 @@ export const DataProvider = (props) => {
         dispatch: setState,
       }}
     >
-      <WelcomeDialog
-        open={showWelcome}
-        onClose={() => setWelcome(false)}
-      />
-
       {children}
     </DataContext.Provider>
   );

@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import ListView from './Views/ListView/ListView';
 import GridView from './Views/GridView/GridView';
 import SettingsView from './Views/Settings/SettingsView';
 import Header from './Header/Header';
 import SideBar from './SideBar/SideBar';
+import WelcomeDialog from './WelcomeDialog';
 import StatusBar from './StatusBar/StatusBar';
 import ViewContext from '../contexts/ViewContext';
 import DataContext from '../contexts/DataContext';
@@ -27,8 +28,17 @@ const useStyles = makeStyles({
 
 const View = () => {
   const { view, viewSettings } = useContext(ViewContext);
-  const { books: data } = useContext(DataContext);
+  const { libraryPath, books: data } = useContext(DataContext);
+  const [showWelcome, setWelcome] = useState(false);
   const classes = useStyles();
+
+  // Open Welcome if libraryPath was never set
+  useEffect(() => {
+    if (!libraryPath) {
+      // Show welcome screen to set libraryPath
+      setWelcome(true);
+    }
+  }, [libraryPath]);
 
   // Chooses which component to render
   const renderView = () => {
@@ -43,6 +53,10 @@ const View = () => {
 
   return (
     <>
+      <WelcomeDialog
+        open={showWelcome}
+        onClose={() => setWelcome(false)}
+      />
       <SideBar
         drawerWidth={drawerWidth}
         topHeight={topHeight}
