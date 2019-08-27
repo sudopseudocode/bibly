@@ -24,7 +24,16 @@ const ListView = (props) => {
         <TableHead>
           <TableRow>
             <TableCell>
-              Filename
+              Title
+            </TableCell>
+            <TableCell>
+              Author
+            </TableCell>
+            <TableCell>
+              Publisher
+            </TableCell>
+            <TableCell>
+              Format
             </TableCell>
           </TableRow>
         </TableHead>
@@ -32,11 +41,20 @@ const ListView = (props) => {
         <TableBody>
           {data.map(book => (
             <TableRow
-              key={book}
+              key={book.id}
               hover
             >
               <TableCell>
-                {book.split('/').pop()}
+                {book.title}
+              </TableCell>
+              <TableCell>
+                {book.author}
+              </TableCell>
+              <TableCell>
+                {book.publisher}
+              </TableCell>
+              <TableCell>
+                epub
               </TableCell>
             </TableRow>
           ))}
@@ -47,7 +65,16 @@ const ListView = (props) => {
 };
 
 ListView.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.string).isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      publisher: PropTypes.string,
+      identifier: PropTypes.string,
+      description: PropTypes.string,
+    }),
+  ).isRequired,
 };
 
 export default ListView;
