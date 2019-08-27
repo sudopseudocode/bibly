@@ -33,9 +33,12 @@ export const DataProvider = (props) => {
 
   // Compare filePaths whenever they change
   useEffect(() => {
+    // db.table('books').clear();
+    const start = Date.now();
     db.table('books').toArray().then((books) => {
       // Init state
       setState({ books });
+      console.log(`Updated state with initial books from DB: ${Date.now() - start}ms`);
 
       const booksToAdd = filePaths.filter((filePath) => {
         const foundMatch = books.some(book => (
@@ -47,11 +50,13 @@ export const DataProvider = (props) => {
       const metadataToAdd = booksToAdd.map(filePath => getMetadata(filePath));
       return Promise.all(metadataToAdd);
     }).then((metadataToAdd) => {
-      const recordsToAdd = metadataToAdd.map(record => db.table('books').add(record));
-      return Promise.all(recordsToAdd);
+      console.log(`Finished reading metadata: ${Date.now() - start}ms`);
+      return db.table('books').bulkAdd(metadataToAdd);
     })
       .then(() => {
+        console.log(`Finished adding records to DB: ${Date.now() - start}ms`);
         db.table('books').toArray().then((books) => {
+          console.log(`Updated state to include all books: ${Date.now() - start}ms`);
           setState({ books });
         });
       });
