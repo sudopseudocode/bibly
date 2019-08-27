@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Dexie from 'dexie';
 import WelcomeDialog from '../components/WelcomeDialog';
 import getAssets from '../utils/getAssets';
-
-const db = new Dexie('bibly_local');
-db.version(1).stores({
-  books: '++id, title, *author, *collections, *tags',
-});
+import getMetadata from '../utils/getMetadata';
+import db from './db';
 
 const DataContext = React.createContext();
 
@@ -18,21 +14,48 @@ export const DataProvider = (props) => {
     loading: false,
     books: [],
   });
+  const [filePaths, setPaths] = useState([]);
+  // TODO track libraryPath changes with onStorage event?
   const libraryPath = localStorage.getItem('libraryPath');
 
-  // This is run whenever libraryPath changes
+  // Update filePaths whenever libraryPath changes
   useEffect(() => {
     if (libraryPath) {
       // Get all available epub files
       getAssets(libraryPath).then((bookFiles) => {
-        setState({ ...state, books: bookFiles.epub });
+        setPaths(bookFiles.epub);
       });
-      // TODO compare to DB and update as needed
     } else {
       // Show welcome screen to set libraryPath
       setWelcome(true);
     }
   }, [libraryPath]);
+
+  // Compare filePaths whenever they change
+  useEffect(() => {
+    db.table('books').toArray().then((books) => {
+      // Init state
+      setState({ books });
+
+      const booksToAdd = filePaths.filter((filePath) => {
+        const foundMatch = books.some(book => (
+          book.epubFile === filePath
+        ));
+        return !foundMatch;
+      });
+
+      const metadataToAdd = booksToAdd.map(filePath => getMetadata(filePath));
+      return Promise.all(metadataToAdd);
+    }).then((metadataToAdd) => {
+      const recordsToAdd = metadataToAdd.map(record => db.table('books').add(record));
+      return Promise.all(recordsToAdd);
+    })
+      .then(() => {
+        db.table('books').toArray().then((books) => {
+          setState({ books });
+        });
+      });
+  }, [filePaths]);
 
   return (
     <DataContext.Provider

@@ -17,27 +17,27 @@ const GridView = (props) => {
 
   return (
     <div className={classes.container}>
-      {data.map((book) => {
-        const fileName = book.split('/').pop();
-        const extension = fileName.split('.').pop();
-        const title = fileName.split('.').shift().split('-').shift();
-        const author = fileName.split('.').shift().split('-').pop();
-
-        return (
-          <Book
-            key={book}
-            title={title}
-            author={author}
-            fileFormat={extension}
-          />
-        );
-      })}
+      {data.map(book => (
+        <Book
+          key={book.id}
+          title={book.title}
+          author={book.author}
+          fileFormat="epub"
+        />
+      ))}
     </div>
   );
 };
 
 GridView.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.string).isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      epubFile: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
 export default GridView;
