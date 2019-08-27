@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+import Status from './Status';
+import DataContext from '../../contexts/DataContext';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -17,13 +19,25 @@ const useStyles = makeStyles(theme => ({
 
 const StatusBar = (props) => {
   const { data, height } = props;
+  const { loading, updating } = useContext(DataContext);
   const classes = useStyles({ height });
 
   return (
     <div className={classes.container}>
-      Total books:
-      {' '}
-      {data.length}
+      <Status
+        isLoading={loading}
+        message={loading
+          ? 'Loading Library...'
+          : `Total Books: ${data.length}`
+        }
+      />
+
+      {updating && (
+        <Status
+          isLoading={updating}
+          message="Updating Library"
+        />
+      )}
     </div>
   );
 };

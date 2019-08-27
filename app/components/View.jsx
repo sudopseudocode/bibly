@@ -5,7 +5,7 @@ import GridView from './Views/GridView/GridView';
 import SettingsView from './Views/Settings/SettingsView';
 import Header from './Header/Header';
 import SideBar from './SideBar/SideBar';
-import StatusBar from './StatusBar';
+import StatusBar from './StatusBar/StatusBar';
 import ViewContext from '../contexts/ViewContext';
 import DataContext from '../contexts/DataContext';
 
