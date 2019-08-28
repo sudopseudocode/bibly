@@ -23,15 +23,15 @@ export const DataProvider = (props) => {
 
   // Update libraryPath state on localStorage change
   // This only works when changed from another window/tab
-  useEffect(() => {
-    const updateLibraryPath = () => {
-      setState({ libraryPath: localStorage.getItem('libraryPath') });
-    };
-    window.addEventListener('storage', updateLibraryPath);
+  // useEffect(() => {
+  //   const updateLibraryPath = () => {
+  //     setState({ libraryPath: localStorage.getItem('libraryPath') });
+  //   };
+  //   window.addEventListener('storage', updateLibraryPath);
 
-    // Clean up side effects
-    return () => window.removeEventListener('storage', updateLibraryPath);
-  }, []);
+  //   // Clean up side effects
+  //   return () => window.removeEventListener('storage', updateLibraryPath);
+  // }, []);
 
   // Reinit Library whenever libraryPath changes
   const { libraryPath } = state;
