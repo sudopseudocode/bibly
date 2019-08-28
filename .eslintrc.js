@@ -22,8 +22,8 @@ module.exports = {
   rules: {
   },
   settings: {
-    'import/resolver': {
-      webpack: { config: 'configs/webpack.config.eslint.js' },
-    },
+    // 'import/resolver': {
+    //   webpack: { config: 'configs/webpack.config.eslint.js' },
+    // },
   },
 };
