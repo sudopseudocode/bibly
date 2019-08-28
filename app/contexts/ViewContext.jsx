@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const ViewContext = React.createContext();
+const { Provider } = ViewContext;
 
 export const ViewProvider = (props) => {
   const { children } = props;
@@ -12,14 +13,14 @@ export const ViewProvider = (props) => {
   });
 
   return (
-    <ViewContext.Provider
+    <Provider
       value={{
         ...state,
-        dispatch: newState => setState({ ...state, ...newState }),
+        dispatch: (newState) => setState({ ...state, ...newState }),
       }}
     >
       {children}
-    </ViewContext.Provider>
+    </Provider>
   );
 };
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import initLibrary from '../utils/initLibrary';
 
 const DataContext = React.createContext();
+const { Provider } = DataContext;
 
 export const DataProvider = (props) => {
   const { children } = props;
@@ -21,18 +22,6 @@ export const DataProvider = (props) => {
     }
   };
 
-  // Update libraryPath state on localStorage change
-  // This only works when changed from another window/tab
-  // useEffect(() => {
-  //   const updateLibraryPath = () => {
-  //     setState({ libraryPath: localStorage.getItem('libraryPath') });
-  //   };
-  //   window.addEventListener('storage', updateLibraryPath);
-
-  //   // Clean up side effects
-  //   return () => window.removeEventListener('storage', updateLibraryPath);
-  // }, []);
-
   // Reinit Library whenever libraryPath changes
   const { libraryPath } = state;
   useEffect(() => {
@@ -43,14 +32,14 @@ export const DataProvider = (props) => {
   }, [libraryPath]);
 
   return (
-    <DataContext.Provider
+    <Provider
       value={{
         ...state,
         dispatch: setState,
       }}
     >
       {children}
-    </DataContext.Provider>
+    </Provider>
   );
 };
 

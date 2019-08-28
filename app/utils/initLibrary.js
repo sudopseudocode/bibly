@@ -3,16 +3,16 @@ import getAssets from './getAssets';
 import db from '../contexts/db';
 
 const initLibrary = async (libraryPath, setState) => {
+  // TODO remove this, it's here just for testing purposes
   db.table('books').clear();
   const start = Date.now();
   setState({ loading: true });
 
   // Get all available epub files
   const filePaths = await getAssets(libraryPath)
-    .then(bookFiles => bookFiles.epub)
+    .then((bookFiles) => bookFiles.epub)
     .catch(() => []);
   console.log(`Fetched filePaths for books: ${Date.now() - start}ms`);
-
 
   // Set state with initial DB
   const initDB = await db.table('books').toArray();
@@ -21,13 +21,13 @@ const initLibrary = async (libraryPath, setState) => {
 
   // Find filePaths not already in DB
   const booksToAdd = filePaths.filter((filePath) => {
-    const foundMatch = initDB.some(book => (
-      book.epubFile === filePath
+    const foundMatch = initDB.some((book) => (
+      book.epubFile === filePath.replace(libraryPath, '')
     ));
     return !foundMatch;
   });
   // Fetch metadata for these books
-  const metadataPromises = booksToAdd.map(filePath => getMetadata(filePath));
+  const metadataPromises = booksToAdd.map((filePath) => getMetadata(filePath, libraryPath));
   const metadataToAdd = await Promise.all(metadataPromises);
   console.log(`Finished reading metadata: ${Date.now() - start}ms`);
 
