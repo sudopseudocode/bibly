@@ -4,7 +4,7 @@ import { Typography } from '@material-ui/core';
 import LocalLibrary from './LocalLibrary';
 import SyncSettings from './SyncSettings';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     margin: theme.spacing(4),
     display: 'grid',

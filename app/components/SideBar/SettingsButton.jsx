@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 import SettingsIcon from 'mdi-material-ui/Settings';
 import ViewContext from '../../contexts/ViewContext';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(0.5),
   },

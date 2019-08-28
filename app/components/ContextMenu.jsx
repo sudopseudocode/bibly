@@ -6,7 +6,7 @@ import {
   MenuItem,
 } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   menuItem: {
     '&:hover': {
       backgroundColor: theme.palette.primary.main,
@@ -46,7 +46,7 @@ const ContextMenu = (props) => {
       }}
       MenuListProps={{ disablePadding: true }}
     >
-      {menuItems.map(item => (
+      {menuItems.map((item) => (
         <MenuItem
           key={item.label}
           onClick={() => {

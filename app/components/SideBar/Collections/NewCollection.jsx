@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
 import EditPopover from './EditCollection';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   button: {
     borderRadius: 10,
     padding: theme.spacing(1),
@@ -28,10 +28,10 @@ const NewCollection = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   return (
-    <React.Fragment>
+    <>
       <Button
         className={classes.button}
-        onClick={event => setAnchorEl(event.currentTarget)}
+        onClick={(event) => setAnchorEl(event.currentTarget)}
       >
         New Collection
       </Button>
@@ -44,7 +44,7 @@ const NewCollection = (props) => {
         label="Add"
         resetSubmit
       />
-    </React.Fragment>
+    </>
   );
 };
 

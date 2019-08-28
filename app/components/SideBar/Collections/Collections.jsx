@@ -4,7 +4,7 @@ import generateId from 'uuid/v4';
 import NewCollection from './NewCollection';
 import SortableList from './SortableList';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -33,7 +33,7 @@ const Collections = () => {
   }
   const [collections, setCollections] = useState(initCollections);
   const [collectionOrder, setOrder] = useState(initOrder);
-  const sortableItems = collectionOrder.map(id => ({
+  const sortableItems = collectionOrder.map((id) => ({
     ...collections[id],
     onRename: (newLabel) => {
       const newCollections = {
@@ -52,7 +52,7 @@ const Collections = () => {
     onDelete: () => {
       const newCollections = { ...collections };
       delete newCollections[id];
-      const newOrder = collectionOrder.filter(current => current !== id);
+      const newOrder = collectionOrder.filter((current) => current !== id);
       setOrder(newOrder);
       setCollections(newCollections);
       localStorage.setItem(

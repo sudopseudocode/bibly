@@ -11,7 +11,7 @@ import {
 import FolderOpenIcon from 'mdi-material-ui/FolderOpen';
 import DataContext from '../../../contexts/DataContext';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     alignItems: 'flex-start',

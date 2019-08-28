@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import Status from './Status';
 import DataContext from '../../contexts/DataContext';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: '#FAF3FF',
     borderTop: '1px solid #F2E0FF',
@@ -28,8 +28,7 @@ const StatusBar = (props) => {
         isLoading={loading}
         message={loading
           ? 'Loading Library...'
-          : `Total Books: ${data.length}`
-        }
+          : `Total Books: ${data.length}`}
       />
 
       {updating && (

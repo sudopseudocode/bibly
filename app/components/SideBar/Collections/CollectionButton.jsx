@@ -7,7 +7,7 @@ import ContextMenu from '../../ContextMenu';
 import EditCollection from './EditCollection';
 import ConfirmDelete from './ConfirmDelete';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   button: {
     borderRadius: 10,
     padding: theme.spacing(1),
@@ -45,7 +45,7 @@ const CollectionButton = (props) => {
   const [confirmDelete, setDelete] = useState(false);
 
   return (
-    <React.Fragment>
+    <>
       <Button
         className={classes.button}
         ref={anchorEl}
@@ -92,7 +92,7 @@ const CollectionButton = (props) => {
         onDelete={onDelete}
         collectionName={label}
       />
-    </React.Fragment>
+    </>
   );
 };
 

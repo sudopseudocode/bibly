@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import SearchControls from './SearchControls';
 import ViewControls from './ViewControls';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     position: 'sticky',
     top: 0,

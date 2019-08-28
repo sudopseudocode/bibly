@@ -7,7 +7,7 @@ import {
   Fab,
 } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   menu: {
     marginTop: theme.spacing(1),
     padding: theme.spacing(2),
@@ -70,7 +70,7 @@ const EditCollection = (props) => {
           autoFocus
           value={collection}
           placeholder="Collection Name"
-          onChange={event => setCollection(event.target.value)}
+          onChange={(event) => setCollection(event.target.value)}
           className={classes.text}
         />
         <Fab

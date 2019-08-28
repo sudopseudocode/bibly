@@ -11,12 +11,12 @@ import {
 } from '@material-ui/core';
 import SearchIcon from 'mdi-material-ui/Magnify';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     alignItems: 'flex-end',
     padding: theme.spacing(0, 4),
-    height: topHeight => topHeight,
+    height: (topHeight) => topHeight,
     borderBottom: `1px solid ${theme.palette.common.gray}`,
   },
   searchBar: {
@@ -45,7 +45,7 @@ const SearchControls = (props) => {
         <TextField
           fullWidth
           value={searchText}
-          onChange={event => setSearch(event.target.value)}
+          onChange={(event) => setSearch(event.target.value)}
           placeholder="Search"
           InputProps={{
             startAdornment: (
@@ -61,7 +61,7 @@ const SearchControls = (props) => {
         <InputLabel>Sort by</InputLabel>
         <Select
           value={sortBy}
-          onChange={event => setSort(event.target.value)}
+          onChange={(event) => setSort(event.target.value)}
         >
           <MenuItem value=""><em>None</em></MenuItem>
           <MenuItem value="test">Test</MenuItem>

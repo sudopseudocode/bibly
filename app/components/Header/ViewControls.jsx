@@ -9,7 +9,7 @@ import GridIcon from 'mdi-material-ui/ViewGrid';
 import ListIcon from 'mdi-material-ui/FormatListBulleted';
 import ViewContext from '../../contexts/ViewContext';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     padding: theme.spacing(2, 4),
   },

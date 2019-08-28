@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import Book from './Book';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     margin: theme.spacing(0, 2),
     display: 'flex',
@@ -17,7 +17,7 @@ const GridView = (props) => {
 
   return (
     <div className={classes.container}>
-      {data.map(book => (
+      {data.map((book) => (
         <Book
           key={book.id}
           title={book.title}

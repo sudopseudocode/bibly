@@ -6,7 +6,7 @@ import {
 } from '@material-ui/core';
 import General from './General';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   tab: {
     textTransform: 'none',
     padding: theme.spacing(0, 6),
@@ -25,7 +25,7 @@ const SettingsView = () => {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+    <>
       <Tabs
         value={step}
         indicatorColor="primary"
@@ -43,7 +43,7 @@ const SettingsView = () => {
       </Tabs>
 
       <CurrentView />
-    </React.Fragment>
+    </>
   );
 };
 

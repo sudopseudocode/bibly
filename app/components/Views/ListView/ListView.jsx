@@ -39,7 +39,7 @@ const ListView = (props) => {
         </TableHead>
 
         <TableBody>
-          {data.map(book => (
+          {data.map((book) => (
             <TableRow
               key={book.id}
               hover

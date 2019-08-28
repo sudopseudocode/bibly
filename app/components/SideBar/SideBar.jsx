@@ -5,7 +5,7 @@ import { Drawer } from '@material-ui/core';
 import SettingsButton from './SettingsButton';
 import Collections from './Collections/Collections';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: ({ drawerWidth }) => drawerWidth,
   },

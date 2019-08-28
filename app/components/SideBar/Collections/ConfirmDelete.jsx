@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import Close from 'mdi-material-ui/Close';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   content: {
     margin: theme.spacing(4),
   },

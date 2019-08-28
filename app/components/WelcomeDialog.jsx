@@ -6,7 +6,7 @@ import { Dialog } from '@material-ui/core';
 import SyncSettings from './Views/Settings/SyncSettings';
 import LocalLibrary from './Views/Settings/LocalLibrary';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   title: {
     marginTop: theme.spacing(4),
     fontFamily: 'Libre Caslon Display',
