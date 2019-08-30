@@ -88,12 +88,12 @@ const LocalLibrary = (props) => {
         variant="contained"
         color="primary"
         className={classes.folderButton}
-        onClick={() => {
-          const selection = dialog.showOpenDialog({
+        onClick={async () => {
+          const selection = await dialog.showOpenDialog({
             properties: ['openDirectory'],
           });
           if (selection) {
-            const [filePath] = selection;
+            const { filePaths: [filePath] } = selection;
             setLibraryPath(filePath);
           }
         }}
