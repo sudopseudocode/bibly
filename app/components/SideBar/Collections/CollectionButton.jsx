@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'none',
     backgroundColor: theme.palette.common.lighterGray,
     color: theme.palette.primary.dark,
+    transition: `opacity ${theme.transitions.duration.complex}ms`,
     // Prevents text from breaking to new line
     display: 'block',
     whiteSpace: 'nowrap',
@@ -25,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
 
     '&:hover': {
       backgroundColor: theme.palette.common.lighterGray,
+      opacity: 0.8,
+      transition: `opacity ${theme.transitions.duration.complex}ms`,
     },
   },
 }));

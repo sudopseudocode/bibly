@@ -18,21 +18,21 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     width: 50,
-    transition: `border-color ${theme.transitions.duration.short}, background-color ${theme.transitions.duration.short}`,
+    transition: `border-color ${theme.transitions.duration.short}ms, background-color ${theme.transitions.duration.short}ms`,
 
     '& path, rect': {
-      transition: `fill ${theme.transitions.duration.short}`,
+      transition: `fill ${theme.transitions.duration.short}ms`,
       fill: theme.palette.common.darkGray,
     },
   },
   activeView: {
-    transition: `border-color ${theme.transitions.duration.short}, background-color ${theme.transitions.duration.short}`,
+    transition: `border-color ${theme.transitions.duration.short}ms, background-color ${theme.transitions.duration.short}ms`,
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
     borderColor: theme.palette.primary.dark,
 
     '& path, rect': {
-      transition: `fill ${theme.transitions.duration.short}`,
+      transition: `fill ${theme.transitions.duration.short}ms`,
       fill: theme.palette.primary.contrastText,
     },
     '&:hover': {

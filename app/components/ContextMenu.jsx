@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.primary.contrastText,
-      transition: `color ${theme.transitions.duration.short}, background-color ${theme.transitions.duration.short}`,
+      transition: `color ${theme.transitions.duration.short}ms, background-color ${theme.transitions.duration.short}ms`,
     },
   },
 }));
