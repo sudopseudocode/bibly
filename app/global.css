@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 400;
   src: local('Roboto'), local('Roboto'),
-    url('./assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
+    url('../resources/fonts/Roboto/Roboto-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
 }
 
 @font-face {
@@ -11,7 +11,7 @@
   font-style: normal;
   font-weight: 400;
   src: local('Libre Caslon Display'), local('Libre Caslon Display'),
-    url('./assets/fonts/Libre_Caslon_Display/LibreCaslonDisplay-Regular.ttf')
+    url('../resources/fonts/Libre_Caslon_Display/LibreCaslonDisplay-Regular.ttf')
       format('truetype'); /* Safari, Android, iOS */
 }
 
