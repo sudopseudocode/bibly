@@ -1,6 +1,9 @@
 module.exports = {
 	extends: [
+    'plugin:jest/recommended',
+    'plugin:promise/recommended',
 		'airbnb',
+    'prettier',
 	],
 	parser: 'babel-eslint',
 	parserOptions: {
@@ -19,6 +22,8 @@ module.exports = {
 	plugins: [
     'react',
     'jest',
+    'prettier',
+    'promise',
   ],
   settings: {
     'import/resolver': {
@@ -45,11 +50,6 @@ module.exports = {
 
 		// Warns on console usage
 		'no-console': [1],
-
-		// Discourages underscore in variable names.  Allows for Mongo IDs
-    // 'no-underscore-dangle': ['error', {
-    //   allow: ['_id']
-    // }],
 
     // Max length of a row
     // Changes to warning
