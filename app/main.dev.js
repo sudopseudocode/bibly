@@ -13,6 +13,7 @@
 import { app, BrowserWindow } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import path from 'path';
 import MenuBuilder from './menu';
 
 export default class AppUpdater {
@@ -38,6 +39,7 @@ if (
 }
 
 const installExtensions = async () => {
+  // eslint-disable-next-line import/no-extraneous-dependencies
   const installer = require('electron-devtools-installer');
   const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
   const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
@@ -71,6 +73,7 @@ app.on('ready', async () => {
     show: false,
     width: 1024,
     height: 728,
+    icon: path.join(__dirname, 'resources/icons/BiblyWhite.icns'),
     webPreferences: {
       nodeIntegration: true,
     },
