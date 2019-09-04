@@ -10,27 +10,16 @@
     "build-main": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.config.main.prod.babel.js --colors",
     "build-renderer": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.config.renderer.prod.babel.js --colors",
     "dev": "cross-env START_HOT=1 node -r @babel/register ./internals/scripts/CheckPortInUse.js && cross-env START_HOT=1 npm run start-renderer-dev",
-    "lint": "cross-env NODE_ENV=development eslint --cache --format=pretty .",
-    "lint-fix": "npm run --silent lint --fix; exit 0",
-    "lint-styles": "stylelint --ignore-path .eslintignore '**/*.*(css|scss)' --syntax scss",
-    "lint-styles-fix": "npm run --silent lint-styles --fix; exit 0",
     "package": "npm run build && electron-builder build --publish never",
     "package-all": "npm run build && electron-builder build -mwl",
     "package-ci": "npm run postinstall && npm run build && electron-builder --publish always",
     "package-linux": "npm run build && electron-builder build --linux",
     "package-win": "npm run build && electron-builder build --win --x64",
     "postinstall": "electron-builder install-app-deps package.json && npm run build-dll && opencollective-postinstall",
-    "postlint-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{js,jsx,json,html,css,less,scss,yml}'",
-    "postlint-styles-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{css,scss}'",
     "prestart": "npm run build",
     "start": "cross-env NODE_ENV=production electron ./app/main.prod.js",
     "start-main-dev": "cross-env HOT=1 NODE_ENV=development electron -r @babel/register ./app/main.dev.js",
-    "start-renderer-dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.config.renderer.dev.babel.js",
-    "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest",
-    "test-all": "npm run lint && npm run flow && npm run build && npm run test && npm run build-e2e && npm run test-e2e",
-    "test-e2e": "node -r @babel/register ./internals/scripts/CheckBuiltsExist.js && cross-env NODE_ENV=test testcafe electron:./ ./test/e2e/HomePage.e2e.js",
-    "test-e2e-live": "node -r @babel/register ./internals/scripts/CheckBuiltsExist.js && cross-env NODE_ENV=test testcafe-live electron:./ ./test/e2e/HomePage.e2e.js",
-    "test-watch": "npm run test --watch"
+    "start-renderer-dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.config.renderer.dev.babel.js"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -52,7 +41,7 @@
   },
   "main": "./app/main.prod.js",
   "build": {
-    "productName": "ElectronReact",
+    "productName": "Bibly",
     "appId": "org.develar.ElectronReact",
     "files": [
       "app/dist/",
@@ -96,8 +85,8 @@
     },
     "publish": {
       "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate",
+      "owner": "Paul DiLoreto",
+      "repo": "paulmichaelxd/bibly",
       "private": false
     }
   },
@@ -122,6 +111,10 @@
     "url": "https://github.com/paulmichaelxd/bibly/issues"
   },
   "keywords": [
+    "epub",
+    "bibly",
+    "ebook",
+    "calibre",
     "electron",
     "react",
     "redux",
@@ -130,24 +123,6 @@
     "reload"
   ],
   "homepage": "https://github.com/paulmichaelxd/bibly#readme",
-  "jest": {
-    "testURL": "http://localhost/",
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/fileMock.js",
-      "\\.(css|less|sass|scss)$": "identity-obj-proxy"
-    },
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json"
-    ],
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    },
-    "setupFiles": [
-      "./internals/scripts/CheckBuiltsExist.js"
-    ]
-  },
   "devDependencies": {
     "@babel/core": "^7.4.0",
     "@babel/plugin-proposal-class-properties": "^7.4.0",

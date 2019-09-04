@@ -8,19 +8,18 @@ Bibly is an e-book library manager inspired by Calibre. It is an Electron app de
 npm install
 ```
 
-Then in two separate terminal instances, run:
+Then run
 
 ```
-npm run start-renderer-dev
+npm run dev
 ```
 
-This will run a webpack-dev-server with the app's UI. Hot reloading is enabled. Then run:
+This will run two processes simultaneously:
 
-```
-npm run start-main-dev
-```
+- A webpack-dev-server with hot reloading for the app's UI
+- The electron main process
 
-This will launch the electron app itself, which in development mode connects with the webpack-dev-server.
+In development mode, electron main process will connect to the webpack-dev-server. For prod, the main process loads with minified files.
 
 ## Supported Features
 
