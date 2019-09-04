@@ -8,7 +8,7 @@ const developmentPlugins = [require('react-hot-loader/babel')];
 const productionPlugins = [
   require('babel-plugin-dev-expression'),
 
-  // babel-preset-react-optimize
+  // These plugins are for optimizing production builds
   require('@babel/plugin-transform-react-constant-elements'),
   require('@babel/plugin-transform-react-inline-elements'),
   require('babel-plugin-transform-react-remove-prop-types'),
@@ -16,7 +16,6 @@ const productionPlugins = [
 
 module.exports = (api) => {
   // see docs about api at https://babeljs.io/docs/en/config-files#apicache
-
   const development = api.env(developmentEnvironments);
 
   return {
@@ -31,19 +30,6 @@ module.exports = (api) => {
       [require('@babel/preset-react'), { development }],
     ],
     plugins: [
-      // Stage 2
-      // [require('@babel/plugin-proposal-decorators'), { legacy: true }],
-      // require('@babel/plugin-proposal-function-sent'),
-      // require('@babel/plugin-proposal-export-namespace-from'),
-      // require('@babel/plugin-proposal-numeric-separator'),
-      // require('@babel/plugin-proposal-throw-expressions'),
-
-      // Stage 3
-      // require('@babel/plugin-syntax-dynamic-import'),
-      // require('@babel/plugin-syntax-import-meta'),
-      // [require('@babel/plugin-proposal-class-properties'), { loose: true }],
-      // require('@babel/plugin-proposal-json-strings'),
-
       ...(development ? developmentPlugins : productionPlugins),
     ],
   };
