@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import initLibrary from '../utils/initLibrary';
+import db from './db';
 
 const DataContext = React.createContext();
 const { Provider } = DataContext;
@@ -19,6 +20,8 @@ export const DataProvider = (props) => {
     // Sync state changes with localStorage
     if (newState.libraryPath) {
       localStorage.setItem('libraryPath', newState.libraryPath);
+      // Reset DB
+      db.table('books').clear();
     }
   };
 
