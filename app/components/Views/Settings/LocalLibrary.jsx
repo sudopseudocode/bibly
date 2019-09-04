@@ -92,7 +92,7 @@ const LocalLibrary = (props) => {
           const selection = await dialog.showOpenDialog({
             properties: ['openDirectory'],
           });
-          if (selection) {
+          if (selection && selection.filePaths && selection.filePaths.length > 0) {
             const { filePaths: [filePath] } = selection;
             setLibraryPath(filePath);
           }
