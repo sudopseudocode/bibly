@@ -3,6 +3,8 @@ import getAssets from './getAssets';
 import db from '../contexts/db';
 
 const initLibrary = async (libraryPath, setState) => {
+  // db.table('books').clear();
+
   const start = Date.now();
   setState({ loading: true });
 

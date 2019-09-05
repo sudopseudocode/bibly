@@ -35,6 +35,13 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     color: theme.palette.primary.contrastText,
   },
+  bookCover: {
+    height: 300,
+    backgroundImage: ({ bookCover }) => `url(data:image/jpeg;base64,${bookCover})`,
+    backgroundSize: 'contain',
+    backgroundPosition: 'bottom left',
+    backgroundRepeat: 'no-repeat',
+  },
 }));
 
 const Book = (props) => {
@@ -44,12 +51,17 @@ const Book = (props) => {
     fileFormat,
     bookCover,
   } = props;
-  const classes = useStyles();
+  const classes = useStyles(props);
 
   return (
     <div className={classes.container}>
       {bookCover
-        ? null
+        ? (
+          <div
+            className={classes.bookCover}
+            alt={`${title} Book Cover`}
+          />
+        )
         : (
           <div className={classes.placeholder}>
             {fileFormat}

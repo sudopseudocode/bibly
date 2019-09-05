@@ -23,6 +23,7 @@ const GridView = (props) => {
           title={book.title}
           author={book.author}
           fileFormat="epub"
+          bookCover={book.bookCover}
         />
       ))}
     </div>
@@ -36,6 +37,7 @@ GridView.propTypes = {
       title: PropTypes.string.isRequired,
       author: PropTypes.string.isRequired,
       epubFile: PropTypes.string.isRequired,
+      bookCover: PropTypes.string,
     }),
   ).isRequired,
 };
