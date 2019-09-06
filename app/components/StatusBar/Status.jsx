@@ -28,6 +28,7 @@ const Status = (props) => {
           thickness={7}
         />
       )}
+
       <span className={classes.statusMessage}>
         {message}
       </span>

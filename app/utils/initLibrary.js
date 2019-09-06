@@ -16,29 +16,44 @@ const initLibrary = async (libraryPath, setState) => {
 
   // Set state with initial DB
   const initDB = await db.table('books').toArray();
-  setState({ books: initDB, loading: false, updating: true });
+  setState({ books: initDB, loading: false });
   console.log(`Updated state with initial books from DB: ${Date.now() - start}ms`);
 
   // Find filePaths not already in DB
+  let bookCount = 0;
   const booksToAdd = filePaths.filter((filePath) => {
     const foundMatch = initDB.some((book) => (
       book.epubFile === filePath.replace(libraryPath, '')
     ));
     return !foundMatch;
   });
+  if (booksToAdd.length > 0) {
+    setState({ updateProgress: 0 });
+  } else {
+    // We can skip the rest, its only for adding new books
+    return;
+  }
+
   // Fetch metadata for these books
-  const metadataPromises = booksToAdd.map((filePath) => getMetadata(filePath, libraryPath));
+  const setProgress = () => {
+    bookCount += 1;
+    setState({
+      updateProgress: (bookCount / booksToAdd.length) * 100,
+    });
+  };
+  const metadataPromises = booksToAdd.map((filePath) => getMetadata(filePath, libraryPath, setProgress));
   const metadataToAdd = await Promise.all(metadataPromises);
   console.log(`Finished reading metadata: ${Date.now() - start}ms`);
 
   // Add new books to DB
   await db.table('books').bulkAdd(metadataToAdd);
   console.log(`Finished adding records to DB: ${Date.now() - start}ms`);
+  setState({ updateProgress: 100 });
 
   // Get new DB
   const newDB = await db.table('books').toArray();
   console.log(`Updated state to include all books: ${Date.now() - start}ms`);
-  setState({ books: newDB, updating: false });
+  setState({ books: newDB, updateProgress: null });
 };
 
 export default initLibrary;

@@ -12,7 +12,7 @@ export const DataProvider = (props) => {
   const [state, setWholeState] = useState({
     libraryPath: localStorage.getItem('libraryPath'),
     loading: false,
-    updating: false,
+    updateProgress: null,
     books: [],
   });
   const setState = (newState) => {
