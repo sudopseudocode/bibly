@@ -1,62 +1,80 @@
-import React from 'react';
+/* eslint react/jsx-props-no-spreading: off */
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-// import { makeStyles } from '@material-ui/styles';
+import { useTable, useSortBy } from 'react-table';
 import {
   Table,
   TableHead,
   TableBody,
   TableRow,
   TableCell,
+  TableSortLabel,
 } from '@material-ui/core';
-
-// const useStyles = makeStyles(theme => ({
-//   container: {
-//   },
-// }));
 
 const ListView = (props) => {
   const { data } = props;
-  // const classes = useStyles();
+  const columns = useMemo(
+    () => [
+      {
+        Header: 'Title',
+        accessor: 'title',
+      },
+      {
+        Header: 'Author',
+        accessor: 'author',
+      },
+      {
+        Header: 'Genre',
+        accessor: 'genre',
+      },
+      {
+        Header: 'Publisher',
+        accessor: 'publisher',
+      },
+    ],
+    []
+  );
+  const {
+    getTableProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable({ data, columns }, useSortBy);
 
   return (
     <div>
-      <Table>
+      <Table {...getTableProps()}>
         <TableHead>
-          <TableRow>
-            <TableCell>
-              Title
-            </TableCell>
-            <TableCell>
-              Author
-            </TableCell>
-            <TableCell>
-              Publisher
-            </TableCell>
-            <TableCell>
-              Format
-            </TableCell>
-          </TableRow>
+          {headerGroups.map(headerGroup => (
+            <TableRow
+              {...headerGroup.getHeaderGroupProps()}
+              hover
+            >
+              {headerGroup.headers.map(column => (
+                <TableCell {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  <TableSortLabel
+                    active={column.isSorted}
+                    direction={column.isSortedDesc ? 'desc' : 'asc'}
+                  >
+                    {column.render('Header')}
+                  </TableSortLabel>
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
         </TableHead>
 
         <TableBody>
-          {data.map((book) => (
-            <TableRow
-              key={book.id}
-              hover
-            >
-              <TableCell>
-                {book.title}
-              </TableCell>
-              <TableCell>
-                {book.author}
-              </TableCell>
-              <TableCell>
-                {book.publisher}
-              </TableCell>
-              <TableCell>
-                epub
-              </TableCell>
-            </TableRow>
+          {rows.map((row) => (
+            prepareRow(row) || (
+              <TableRow {...row.getRowProps()} hover>
+                {row.cells.map(cell => (
+                  <TableCell {...cell.getCellProps()}>
+                    {cell.render('Cell')}
+                  </TableCell>
+                ))}
+              </TableRow>
+            )
           ))}
         </TableBody>
       </Table>
