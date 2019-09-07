@@ -10,7 +10,7 @@ const getValue = (obj, keys) => (
   keys.reduce((acc, key) => (acc && acc[key]) ? acc[key] : '', obj)
 );
 
-const getEpubMetadata = async (filePath, libraryPath, setProgress) => {
+const getEpubMetadata = async (filePath, libraryPath) => {
   // Load the epub file
   const epubFile = await readFile(filePath);
   const epubContents = await JSZip.loadAsync(epubFile);
@@ -66,8 +66,6 @@ const getEpubMetadata = async (filePath, libraryPath, setProgress) => {
     ? await coverFile.async('base64')
     : '';
 
-  // Increments the loading bar
-  setProgress();
   // This object (as-is) will be saved to the DB
   return {
     epubFile: filePath.replace(libraryPath, ''),

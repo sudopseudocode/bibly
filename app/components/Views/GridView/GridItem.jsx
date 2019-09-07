@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+import BookCover from './BookCover';
 
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    width: 220,
+    width: 200,
     margin: theme.spacing(2),
   },
   title: {
@@ -23,28 +24,9 @@ const useStyles = makeStyles((theme) => ({
     color: 'gray',
     margin: theme.spacing(0.5, 0, 0, 0),
   },
-  placeholder: {
-    height: 300,
-    backgroundColor: theme.palette.primary.light,
-    fontFamily: 'Libre Meslo Display',
-    fontSize: 50,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: theme.palette.primary.contrastText,
-  },
-  bookCover: {
-    height: 300,
-    backgroundImage: ({ bookCover }) => `url(data:image/jpeg;base64,${bookCover})`,
-    backgroundSize: 'contain',
-    backgroundPosition: 'bottom left',
-    backgroundRepeat: 'no-repeat',
-  },
 }));
 
-const Book = (props) => {
+const GridItem = (props) => {
   const {
     title,
     author,
@@ -55,18 +37,11 @@ const Book = (props) => {
 
   return (
     <div className={classes.container}>
-      {bookCover
-        ? (
-          <div
-            className={classes.bookCover}
-            alt={`${title} Book Cover`}
-          />
-        )
-        : (
-          <div className={classes.placeholder}>
-            {fileFormat}
-          </div>
-        )}
+      <BookCover
+        bookCover={bookCover}
+        title={title}
+        fileFormat={fileFormat}
+      />
 
       <p className={classes.title}>
         {title}
@@ -78,14 +53,14 @@ const Book = (props) => {
   );
 };
 
-Book.propTypes = {
+GridItem.propTypes = {
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   fileFormat: PropTypes.string.isRequired,
   bookCover: PropTypes.string,
 };
-Book.defaultProps = {
+GridItem.defaultProps = {
   bookCover: null,
 };
 
-export default Book;
+export default GridItem;

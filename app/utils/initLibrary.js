@@ -1,3 +1,4 @@
+import generateId from 'uuid/v4';
 import getMetadata from './getMetadata';
 import getAssets from './getAssets';
 import db from '../contexts/db';
@@ -41,19 +42,24 @@ const initLibrary = async (libraryPath, setState) => {
       updateProgress: (bookCount / booksToAdd.length) * 100,
     });
   };
-  const metadataPromises = booksToAdd.map((filePath) => getMetadata(filePath, libraryPath, setProgress));
+  const metadataPromises = booksToAdd.map((filePath) => (
+    getMetadata(filePath, libraryPath).then((metadata) => {
+      // Update status progress
+      setProgress();
+      return {
+        id: generateId(),
+        ...metadata,
+      };
+    })
+  ));
   const metadataToAdd = await Promise.all(metadataPromises);
   console.log(`Finished reading metadata: ${Date.now() - start}ms`);
 
   // Add new books to DB
   await db.table('books').bulkAdd(metadataToAdd);
   console.log(`Finished adding records to DB: ${Date.now() - start}ms`);
-  setState({ updateProgress: 100 });
-
-  // Get new DB
-  const newDB = await db.table('books').toArray();
-  console.log(`Updated state to include all books: ${Date.now() - start}ms`);
-  setState({ books: newDB, updateProgress: null });
+  // Remove updating status bar
+  setState({ books: [...initDB, ...metadataToAdd], updateProgress: null });
 };
 
 export default initLibrary;

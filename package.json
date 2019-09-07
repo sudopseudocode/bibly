@@ -194,6 +194,7 @@
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.12.12",
     "react-sortable-hoc": "^1.10.1",
+    "react-virtualized": "^9.21.1",
     "recursive-readdir": "^2.2.2",
     "source-map-support": "^0.5.11",
     "uuid": "^3.3.3",

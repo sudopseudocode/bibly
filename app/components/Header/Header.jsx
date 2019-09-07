@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'sticky',
     top: 0,
     backgroundColor: theme.palette.background.default,
+    zIndex: 1,
   },
 }));
 
