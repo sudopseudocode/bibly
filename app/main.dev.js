@@ -59,6 +59,37 @@ app.on('window-all-closed', () => {
   }
 });
 
+// MacOS clicking on App
+app.on('activate', (event, hasVisibleWindows) => {
+  if (hasVisibleWindows) return;
+
+  mainWindow = new BrowserWindow({
+    show: false,
+    width: 1024,
+    height: 728,
+    icon: path.join(__dirname, 'resources/icons/BiblyWhite.icns'),
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  });
+
+  mainWindow.loadURL(`file://${__dirname}/app.html`);
+
+  // @TODO: Use 'ready-to-show' event
+  //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
+  mainWindow.webContents.on('did-finish-load', () => {
+    if (!mainWindow) {
+      throw new Error('"mainWindow" is not defined');
+    }
+    if (process.env.START_MINIMIZED) {
+      mainWindow.minimize();
+    } else {
+      mainWindow.show();
+      mainWindow.focus();
+    }
+  });
+});
+
 app.on('ready', async () => {
   if (
     process.env.NODE_ENV === 'development'
