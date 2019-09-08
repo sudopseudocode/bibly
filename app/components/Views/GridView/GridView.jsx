@@ -10,60 +10,69 @@ import GridItem from './GridItem';
 
 const cache = new CellMeasurerCache({
   defaultHeight: 280,
-  defaultWidth: 200,
+  fixedWidth: true,
 });
 
 const GridView = (props) => {
   const { data } = props;
-  const booksPerRow = 4;
-  const cellRenderer = ({ key, style, columnIndex, rowIndex, parent }) => {
-    const startIndex = rowIndex * booksPerRow;
-    const book = data[startIndex + columnIndex];
-    if (!book) return null;
+
+  const autoSizerChildren = ({ width, height }) => {
+    const booksPerRow = width < 230 ? 1 : Math.floor(width / 230);
+    const cellRenderer = ({ key, style, columnIndex, rowIndex, parent }) => {
+      const startIndex = rowIndex * booksPerRow;
+      const book = data[startIndex + columnIndex];
+      if (!book) return null;
+
+      return (
+        <CellMeasurer
+          cache={cache}
+          key={key}
+          parent={parent}
+          rowIndex={rowIndex}
+          columnIndex={columnIndex}
+        >
+          <div style={style}>
+            <GridItem
+              key={book.id}
+              title={book.title}
+              author={book.author}
+              fileFormat="epub"
+              bookCover={book.bookCover}
+            />
+          </div>
+        </CellMeasurer>
+      );
+    };
+    cellRenderer.propTypes = {
+      key: PropTypes.string.isRequired,
+      style: PropTypes.shape({}).isRequired,
+      columnIndex: PropTypes.number.isRequired,
+      rowIndex: PropTypes.number.isRequired,
+      parent: PropTypes.element.isRequired,
+    };
 
     return (
-      <CellMeasurer
-        cache={cache}
-        key={key}
-        overscanRowCount={10}
-        parent={parent}
-        rowIndex={rowIndex}
-        columnIndex={columnIndex}
-      >
-        <div style={style}>
-          <GridItem
-            key={book.id}
-            title={book.title}
-            author={book.author}
-            fileFormat="epub"
-            bookCover={book.bookCover}
-          />
-        </div>
-      </CellMeasurer>
+      <Grid
+        style={{ overflow: 'auto' }}
+        cellRenderer={cellRenderer}
+        columnCount={booksPerRow}
+        // We know this from width + margin in GridItem.jsx
+        columnWidth={230}
+        rowCount={Math.ceil(data.length / booksPerRow)}
+        rowHeight={cache.rowHeight}
+        height={height}
+        width={width}
+      />
     );
   };
-  cellRenderer.propTypes = {
-    key: PropTypes.string.isRequired,
-    style: PropTypes.shape({}).isRequired,
-    columnIndex: PropTypes.number.isRequired,
-    rowIndex: PropTypes.number.isRequired,
-    parent: PropTypes.element.isRequired,
+  autoSizerChildren.propTypes = {
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
   };
 
   return (
     <AutoSizer>
-      {({ height, width }) => (
-        <Grid
-          style={{ overflow: 'auto' }}
-          cellRenderer={cellRenderer}
-          columnCount={booksPerRow}
-          columnWidth={cache.columnWidth}
-          rowCount={Math.ceil(data.length / booksPerRow)}
-          rowHeight={cache.rowHeight}
-          height={height}
-          width={width}
-        />
-      )}
+      {autoSizerChildren}
     </AutoSizer>
   );
 };
