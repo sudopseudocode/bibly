@@ -57,7 +57,7 @@ const GridView = (props) => {
         cellRenderer={cellRenderer}
         columnCount={booksPerRow}
         // We know this from width + margin in GridItem.jsx
-        columnWidth={230}
+        columnWidth={width / booksPerRow}
         rowCount={Math.ceil(data.length / booksPerRow)}
         rowHeight={cache.rowHeight}
         height={height}

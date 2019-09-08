@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     width: 200,
-    margin: 15,
+    margin: `${theme.spacing(2)}px auto`,
   },
   title: {
     fontWeight: 'bold',
