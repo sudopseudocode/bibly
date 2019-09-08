@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     paddingBottom,
     backgroundColor: theme.palette.primary.light,
     fontFamily: 'Libre Meslo Display',
-    fontSize: 50,
+    fontSize: ({ mini }) => mini ? 20 : 50,
     fontWeight: 'normal',
     fontStyle: 'normal',
     color: theme.palette.primary.contrastText,
@@ -35,8 +35,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const BookCover = (props) => {
-  const { bookCover, title, fileFormat } = props;
-  const classes = useStyles({ bookCover });
+  const { bookCover, title, fileFormat, mini } = props;
+  const classes = useStyles({ bookCover, mini });
 
   if (bookCover) {
     return (
@@ -59,9 +59,11 @@ BookCover.propTypes = {
   bookCover: PropTypes.string,
   title: PropTypes.string.isRequired,
   fileFormat: PropTypes.string.isRequired,
+  mini: PropTypes.bool,
 };
 BookCover.defaultProps = {
   bookCover: null,
+  mini: false,
 };
 
 export default BookCover;
